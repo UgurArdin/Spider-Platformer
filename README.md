@@ -1,1 +1,1 @@
-# Spider-Platformer
+# SpiderPlatformer
