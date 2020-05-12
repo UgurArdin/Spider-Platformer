@@ -31,11 +31,23 @@ public class Grapple : MonoBehaviour
         {
             Shoot();
         }
+        else if (Input.GetKeyDown(KeyCode.C)) // Added later
+        {
+            target = null;
+            DisableSprintJoint();
+            GetComponentInParent<Rigidbody2D>().gravityScale = 1f;
+            GetComponentInParent<PlayerController>().ResetGrappleSpeed();
+        }
         if (target != null)
         {
             lineRenderer.SetPosition(0, shootPoint.position);
             lineRenderer.SetPosition(1, target.transform.position);
         }
+        else
+        {
+            lineRenderer.enabled = false;
+        }
+       
        
     }
     private void RotateGrapple()
@@ -71,5 +83,13 @@ public class Grapple : MonoBehaviour
     public GameObject GetTarget()
     {
         return target;
+    }
+    public Vector3 GetTargetPos()
+    {
+        return target.transform.position;
+    }
+    public void DisableSprintJoint()
+    {
+        springJoint.enabled = false;
     }
 }

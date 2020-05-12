@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     //Config
     [SerializeField] float runSpeed = 5f;
     [SerializeField] float jumpSpeed = 5f;
+    [SerializeField] float grapplePullSpeed = 3f;
+    float currentGrappleSpeed;
     float health;
     //Component Referances
     Rigidbody2D rigidBody;
@@ -20,6 +22,7 @@ public class PlayerController : MonoBehaviour
     bool isAlive = true;
     void Start()
     {
+        currentGrappleSpeed = grapplePullSpeed;
         grapple = GetComponentInChildren<Grapple>();
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -39,9 +42,27 @@ public class PlayerController : MonoBehaviour
             {
                 if (grapple.GetTarget() != null)
                 {
+                    float distanceBetweenObjectAndPlayer = Vector3.Distance(grapple.GetTargetPos(),transform.position);
                     GameObject targetInstance = grapple.GetTarget();
-                    Vector3 direction = targetInstance.transform.position - transform.position;
-                    transform.position += direction * Time.deltaTime * 2;
+                    if (distanceBetweenObjectAndPlayer >= 2f)
+                    {
+                        Vector3 direction = targetInstance.transform.position - transform.position;
+                        transform.position += direction * Time.deltaTime * grapplePullSpeed;
+                        grapplePullSpeed -= Time.deltaTime*4f;
+                        if(grapplePullSpeed<=0.5f)
+                        {
+                            grapplePullSpeed = 0.5f;
+                        }
+                        rigidBody.gravityScale = 0;
+                    }
+                    else
+                    {
+                        grapplePullSpeed = currentGrappleSpeed;
+                        rigidBody.gravityScale = 1;
+                        GetComponentInChildren<Grapple>().DisableSprintJoint();
+
+                    }
+                    
                 }
 
             }
@@ -85,6 +106,10 @@ public class PlayerController : MonoBehaviour
             return true;
         }
         return false;
+    }
+    public void ResetGrappleSpeed()
+    {
+        grapplePullSpeed = currentGrappleSpeed;
     }
     
 }
