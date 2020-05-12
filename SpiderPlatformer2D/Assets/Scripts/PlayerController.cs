@@ -14,12 +14,13 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     CapsuleCollider2D bodyCollider2D;
     BoxCollider2D playerFeetCollider2D;
+    Grapple grapple;
 
     //State
-    bool isFacingRight = true;
     bool isAlive = true;
     void Start()
     {
+        grapple = GetComponentInChildren<Grapple>();
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         bodyCollider2D = GetComponent<CapsuleCollider2D>();
@@ -29,12 +30,23 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if(isAlive)
+        if (isAlive)
         {
             Run();
             Jump();
             FlipSprite();
+            if (grapple.GetIsGrapple())
+            {
+                if (grapple.GetTarget() != null)
+                {
+                    GameObject targetInstance = grapple.GetTarget();
+                    Vector3 direction = targetInstance.transform.position - transform.position;
+                    transform.position += direction * Time.deltaTime * 2;
+                }
+
+            }
         }
+        
     }
 
     private void Run()
