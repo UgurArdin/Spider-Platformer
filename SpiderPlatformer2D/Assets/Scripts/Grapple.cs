@@ -8,6 +8,7 @@ public class Grapple : MonoBehaviour
     [SerializeField] GameObject bullet;
 
     [SerializeField] float bulletSpeed = 2000f;
+    float timeToGrapple = 0;
 
     [SerializeField] PlayerController playerController;
 
@@ -27,16 +28,18 @@ public class Grapple : MonoBehaviour
     private void Update()
     {
         RotateGrapple();
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0)&&!isGrappled)
         {
             Shoot();
         }
-        else if (Input.GetKeyDown(KeyCode.C)) // Added later
+        else if (Input.GetMouseButtonUp(0)) // Added later
         {
+            timeToGrapple = 0;
             target = null;
             DisableSprintJoint();
             GetComponentInParent<Rigidbody2D>().gravityScale = 1f;
             GetComponentInParent<PlayerController>().ResetGrappleSpeed();
+            isGrappled = false;
         }
         if (target != null)
         {
@@ -58,9 +61,14 @@ public class Grapple : MonoBehaviour
     }
     private void Shoot()
     {
-        GameObject bulletInstance = Instantiate(bullet, shootPoint.position, Quaternion.identity);
-        bulletInstance.GetComponent<GrappleBullet>().SetGrapple(this); // this method will called immedialty when bullet instance is born.
-        bulletInstance.GetComponent<Rigidbody2D>().AddForce(shootPoint.right * bulletSpeed);
+        timeToGrapple += Time.deltaTime;
+        if (timeToGrapple >= 0.4f)
+        {
+            timeToGrapple = 0;
+            GameObject bulletInstance = Instantiate(bullet, shootPoint.position, Quaternion.identity);
+            bulletInstance.GetComponent<GrappleBullet>().SetGrapple(this); // this method will called immedialty when bullet instance is born.
+            bulletInstance.GetComponent<Rigidbody2D>().AddForce(shootPoint.right * bulletSpeed);  
+        }
     }
 
     public void TargetHit(GameObject hit) //when our hidden bullet hits the object with Grappable tag , we will call this method from GrappleBullet
