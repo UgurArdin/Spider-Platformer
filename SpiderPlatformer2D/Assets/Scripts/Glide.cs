@@ -8,6 +8,7 @@ public class Glide : MonoBehaviour
     float defaultGravity;
     public float glidingGravity;
     public float glideTime;
+    public GameObject glideTrail;
     private Rigidbody2D rb;
     
 
@@ -33,6 +34,7 @@ public class Glide : MonoBehaviour
                 if (glideGravity == false)
                 {
                     glideGravity = true;
+                    glideTrail.SetActive(true);
                     GetComponent<Rigidbody2D>().gravityScale = defaultGravity * glidingGravity;
                 }
                
@@ -48,6 +50,7 @@ public class Glide : MonoBehaviour
             if (glideGravity)
             {
                 glideGravity = false;
+                glideTrail.SetActive(false);
                 GetComponent<Rigidbody2D>().gravityScale = defaultGravity;
             }
         }

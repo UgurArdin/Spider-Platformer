@@ -6,6 +6,7 @@ public class GrappleBullet : MonoBehaviour
 {
     private Grapple grapple;
     [SerializeField] GameObject grappableObject;
+    [SerializeField] GameObject webParticle;
     private void Start()
     {
       
@@ -16,6 +17,7 @@ public class GrappleBullet : MonoBehaviour
         {
             ContactPoint2D contact = collision.contacts[0];
             GameObject bulletInstance = Instantiate(grappableObject, contact.point, Quaternion.identity);
+            GameObject webPrefab = Instantiate(webParticle, contact.point, Quaternion.identity);
             grapple.TargetHit(bulletInstance);
 
             Destroy(gameObject);

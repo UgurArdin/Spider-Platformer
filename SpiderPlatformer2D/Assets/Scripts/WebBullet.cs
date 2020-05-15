@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class WebBullet : MonoBehaviour
 {
-    public GameObject hitEffect;
+    public GameObject hitParticle;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(gameObject);
+        if (collision.gameObject.tag == "Grappable")
+        {
+            ContactPoint2D contact = collision.contacts[0];
+            GameObject bulletInstance = Instantiate(hitParticle, contact.point, Quaternion.identity);
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
     }
 }
