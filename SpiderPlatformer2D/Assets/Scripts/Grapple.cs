@@ -37,8 +37,8 @@ public class Grapple : MonoBehaviour
             timeToGrapple = 0;
             target = null;
             DisableSprintJoint();
-            GetComponentInParent<Rigidbody2D>().gravityScale = 1f;
-            GetComponentInParent<PlayerController>().ResetGrappleSpeed();
+            GetComponentInParent<Rigidbody2D>().gravityScale = playerController.gravityDefaultValue;
+            playerController.ResetGrappleSpeed();
             isGrappled = false;
         }
         if (target != null)

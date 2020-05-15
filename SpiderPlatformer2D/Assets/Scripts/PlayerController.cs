@@ -17,17 +17,20 @@ public class PlayerController : MonoBehaviour
     CapsuleCollider2D bodyCollider2D;
     BoxCollider2D playerFeetCollider2D;
     Grapple grapple;
+    [HideInInspector]public float gravityDefaultValue;
 
     //State
     bool isAlive = true;
     void Start()
     {
+
         currentGrappleSpeed = grapplePullSpeed;
         grapple = GetComponentInChildren<Grapple>();
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         bodyCollider2D = GetComponent<CapsuleCollider2D>();
         playerFeetCollider2D = GetComponent<BoxCollider2D>();
+        gravityDefaultValue = rigidBody.gravityScale;
     }
 
 
@@ -58,7 +61,7 @@ public class PlayerController : MonoBehaviour
                     else
                     {
                         grapplePullSpeed = currentGrappleSpeed;
-                        rigidBody.gravityScale = 1;
+                        rigidBody.gravityScale = gravityDefaultValue;
                         GetComponentInChildren<Grapple>().DisableSprintJoint();
 
                     }

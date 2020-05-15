@@ -13,10 +13,10 @@ public class GrappleBullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Grappable")
         {
-            if(grapple.GetTarget()==null)
-            {
+
                 grapple.TargetHit(collision.gameObject);
-            }
+
+            Destroy(gameObject);
            
         }
     }

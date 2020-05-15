@@ -54,7 +54,7 @@ public class Web_Projectile : MonoBehaviour
             if(hit.collider!= null)
             {
                 Debug.DrawLine(webPointPos, hit.point, Color.red);
-                Debug.Log("FIÇIK" + hit.collider.name);
+                //Debug.Log("FIÇIK" + hit.collider.name);
             }
 
             GameObject bullet = Instantiate(bulletPref, webPoint.position, webPoint.rotation);
