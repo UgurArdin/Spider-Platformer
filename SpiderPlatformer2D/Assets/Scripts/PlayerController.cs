@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float jumpSpeed = 5f;
     [SerializeField] float grapplePullSpeed = 3f;
     [SerializeField] float grappleForce = 3f;
+    [SerializeField] float grappleRadious;
 
     [HideInInspector] public float gravityDefaultValue;
 
@@ -63,6 +64,14 @@ public class PlayerController : MonoBehaviour
                             grapplePullSpeed = 0.5f;
                         }
                         rigidBody.gravityScale = 0;
+                        if (distanceBetweenObjectAndPlayer > grappleRadious)
+                        {
+
+                            grapple.target = null;
+                            grapple.springJoint.enabled = false;
+                            rigidBody.gravityScale = gravityDefaultValue;
+
+                        }
                     }
                     else
                     {

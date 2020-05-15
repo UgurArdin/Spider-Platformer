@@ -14,8 +14,8 @@ public class Grapple : MonoBehaviour
     public SpringJoint2D springJoint;
 
     float timeToGrapple = 0;
-    bool isGrappled = false;
-    GameObject target;
+     bool isGrappled = false;
+    [HideInInspector] public GameObject target;
 
 
     private void Start()
@@ -60,13 +60,14 @@ public class Grapple : MonoBehaviour
     private void Shoot()
     {
         timeToGrapple += Time.deltaTime;
-        if (timeToGrapple >= 0.1f)
+        if (timeToGrapple >= 0.3f)
         {
+            Debug.Log("shoot");
             timeToGrapple = 0;
             GameObject bulletInstance = Instantiate(bullet, shootPoint.position, Quaternion.identity);
             bulletInstance.GetComponent<GrappleBullet>().SetGrapple(this); // this method will called immedialty when bullet instance is born.
             bulletInstance.GetComponent<Rigidbody2D>().AddForce(shootPoint.right * bulletSpeed);
-            Destroy(bulletInstance, 1);
+            Destroy(bulletInstance, 0.6f);
         }
     }
 
