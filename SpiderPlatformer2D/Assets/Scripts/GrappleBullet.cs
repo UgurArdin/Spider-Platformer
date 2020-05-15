@@ -5,21 +5,24 @@ using UnityEngine;
 public class GrappleBullet : MonoBehaviour
 {
     private Grapple grapple;
+    [SerializeField] GameObject grappableObject;
     private void Start()
     {
       
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Grappable")
         {
-
-                grapple.TargetHit(collision.gameObject);
+            ContactPoint2D contact = collision.contacts[0];
+            GameObject bulletInstance = Instantiate(grappableObject, contact.point, Quaternion.identity);
+            grapple.TargetHit(bulletInstance);
 
             Destroy(gameObject);
-           
+
         }
     }
+
     public void SetGrapple(Grapple grapple)
     {
         this.grapple = grapple;
