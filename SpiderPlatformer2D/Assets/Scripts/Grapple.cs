@@ -62,7 +62,6 @@ public class Grapple : MonoBehaviour
         timeToGrapple += Time.deltaTime;
         if (timeToGrapple >= 0.3f)
         {
-            Debug.Log("shoot");
             timeToGrapple = 0;
             GameObject bulletInstance = Instantiate(bullet, shootPoint.position, Quaternion.identity);
             bulletInstance.GetComponent<GrappleBullet>().SetGrapple(this); // this method will called immedialty when bullet instance is born.
