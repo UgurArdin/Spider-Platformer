@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
 
     //State
     bool isAlive = true;
+    bool isJumping;
     void Start()
     {
 
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
             Run();
             Jump();
             FlipSprite();
+            ManageJumpingAndFallingAnim();
             if (grapple.GetIsGrapple())
             {
                 if (grapple.GetTarget() != null)
@@ -89,6 +91,30 @@ public class PlayerController : MonoBehaviour
             Vector2 jumpForce = new Vector2(0, jumpSpeed);
             rigidBody.velocity += jumpForce;
         }   
+    }
+    void ManageJumpingAndFallingAnim()
+    {
+        if (rigidBody.velocity.y > 0)
+        {
+            animator.SetBool("IsJumping", true);
+            isJumping = true;
+        }
+
+        else
+        {
+            animator.SetBool("IsJumping", false);
+            isJumping = false;
+        }
+
+        if (rigidBody.velocity.y < -.1f)
+        {
+            animator.SetBool("IsFalling", true);
+        }
+
+        else
+        {
+            animator.SetBool("IsFalling", false);
+        }
     }
     private void FlipSprite()
     {
