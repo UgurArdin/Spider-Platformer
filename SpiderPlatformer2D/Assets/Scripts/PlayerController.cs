@@ -9,16 +9,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float runSpeed = 5f;
     [SerializeField] float jumpSpeed = 5f;
     [SerializeField] float grapplePullSpeed = 3f;
-    float currentGrappleSpeed;
-    float health;
+    [SerializeField] float grappleForce = 3f;
+
+    [HideInInspector] public float gravityDefaultValue;
+
     //Component Referances
     Rigidbody2D rigidBody;
     Animator animator;
     CapsuleCollider2D bodyCollider2D;
     BoxCollider2D playerFeetCollider2D;
     Grapple grapple;
-    [HideInInspector]public float gravityDefaultValue;
 
+    float currentGrappleSpeed;
+    float health;
     //State
     bool isAlive = true;
     bool isJumping;
@@ -52,7 +55,8 @@ public class PlayerController : MonoBehaviour
                     if (distanceBetweenObjectAndPlayer >= 2f)
                     {
                         Vector3 direction = targetInstance.transform.position - transform.position;
-                        transform.position += direction * Time.deltaTime * grapplePullSpeed;
+                        //transform.position += direction * Time.deltaTime * grapplePullSpeed;
+                        rigidBody.AddForce(direction * grappleForce);
                         grapplePullSpeed -= Time.deltaTime*4f;
                         if(grapplePullSpeed<=0.5f)
                         {

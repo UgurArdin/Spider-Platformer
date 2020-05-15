@@ -6,20 +6,18 @@ using UnityEngine;
 public class Grapple : MonoBehaviour
 {
     [SerializeField] GameObject bullet;
-
     [SerializeField] float bulletSpeed = 2000f;
-    float timeToGrapple = 0;
-
     [SerializeField] PlayerController playerController;
 
     public Transform shootPoint;
-
     public LineRenderer lineRenderer;
-
     public SpringJoint2D springJoint;
+
+    float timeToGrapple = 0;
+    bool isGrappled = false;
     GameObject target;
 
-    bool isGrappled = false;
+
     private void Start()
     {
         lineRenderer.enabled = false;
@@ -28,11 +26,11 @@ public class Grapple : MonoBehaviour
     private void Update()
     {
         RotateGrapple();
-        if (Input.GetMouseButton(0)&&!isGrappled)
+        if (Input.GetMouseButton(1)&&!isGrappled)
         {
             Shoot();
         }
-        else if (Input.GetMouseButtonUp(0)) // Added later
+        else if (Input.GetMouseButtonUp(1)) // Added later
         {
             timeToGrapple = 0;
             target = null;
@@ -62,12 +60,13 @@ public class Grapple : MonoBehaviour
     private void Shoot()
     {
         timeToGrapple += Time.deltaTime;
-        if (timeToGrapple >= 0.4f)
+        if (timeToGrapple >= 0.1f)
         {
             timeToGrapple = 0;
             GameObject bulletInstance = Instantiate(bullet, shootPoint.position, Quaternion.identity);
             bulletInstance.GetComponent<GrappleBullet>().SetGrapple(this); // this method will called immedialty when bullet instance is born.
-            bulletInstance.GetComponent<Rigidbody2D>().AddForce(shootPoint.right * bulletSpeed);  
+            bulletInstance.GetComponent<Rigidbody2D>().AddForce(shootPoint.right * bulletSpeed);
+            Destroy(bulletInstance, 1);
         }
     }
 

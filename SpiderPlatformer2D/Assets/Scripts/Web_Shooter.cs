@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Web_Shooter : MonoBehaviour
 {
-    public  int rotationOffset =90;
+      int rotationOffset =0;
 
     
     void Update()
