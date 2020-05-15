@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3957636227968759626}
   - component: {fileID: -12917087209828906}
   - component: {fileID: -1423418674087946627}
-  - component: {fileID: -8155186091241581733}
   m_Layer: 0
   m_Name: TestBullet
   m_TagString: Untagged
@@ -121,15 +120,3 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.08
---- !u!114 &-8155186091241581733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2261164639111186254}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff99032a565aa344589c4383b916b450, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
