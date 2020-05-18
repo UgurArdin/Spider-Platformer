@@ -26,6 +26,17 @@ public class PlayerController : MonoBehaviour
     //State
     bool isAlive = true;
     bool isJumping;
+    bool isFacingRight;
+
+    [Header("Wall Jump")]
+    public LayerMask groundMask;
+    public float wallJumpTime = 0.2f;
+    public float wallSlideSpeed = 0.3f;
+    public float wallDistance = 0.5f;
+    bool isWallSliding = false;
+    RaycastHit2D WallCheckHit;
+    float jumpTime;
+    float mx = 0;
     void Start()
     {
 
@@ -46,6 +57,7 @@ public class PlayerController : MonoBehaviour
             Run();
             Jump();
             FlipSprite();
+            WallJump();
             ManageJumpingAndFallingAnim();
             if (grapple.GetIsGrapple())
             {
@@ -88,6 +100,46 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    private void WallJump()
+    {
+        mx = Input.GetAxis("Horizontal");
+        if (mx < 0)
+        {
+            isFacingRight = false;
+        }
+        else
+        {
+            isFacingRight = true;
+        }
+        if (isFacingRight)
+        {
+            WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(wallDistance, 0), wallDistance, groundMask);
+            //Debug.DrawRay(transform.position, new Vector2(wallDistance, 0), Color.black);
+            Debug.Log("Facing right");
+        }
+        else 
+        {
+            WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(-wallDistance, 0), wallDistance, groundMask);
+            //Debug.DrawRay(transform.position, new Vector2(-wallDistance, 0), Color.black);
+            Debug.Log("Facing left");
+        }
+       
+        if (WallCheckHit && NotInGround() && PlayerHasVelocity())
+        {
+            isWallSliding = true;
+            jumpTime = Time.time + wallJumpTime;
+        }
+        else if (jumpTime < Time.time)
+        {
+            isWallSliding = false;
+        }
+
+        if(isWallSliding)
+        {
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, Mathf.Clamp(rigidBody.velocity.y, wallSlideSpeed, float.MaxValue));
+        }
+    }
+
     private void Run()
     {
         float horizontal = Input.GetAxis("Horizontal");
@@ -97,14 +149,20 @@ public class PlayerController : MonoBehaviour
     }
     private void Jump()
     {
-        if(!playerFeetCollider2D.IsTouchingLayers(LayerMask.GetMask("Ground"))) { return; }
+        if (NotInGround() &&!isWallSliding) { return; }
 
-        if (Input.GetKeyDown(KeyCode.Space)) 
+        if (Input.GetKeyDown(KeyCode.Space) ||isWallSliding &&Input.GetKeyDown(KeyCode.Space))
         {
             Vector2 jumpForce = new Vector2(0, jumpSpeed);
             rigidBody.velocity += jumpForce;
-        }   
+        }
     }
+
+    private bool NotInGround()
+    {
+        return !playerFeetCollider2D.IsTouchingLayers(LayerMask.GetMask("Ground"));
+    }
+
     void ManageJumpingAndFallingAnim()
     {
         if (rigidBody.velocity.y > 0)
