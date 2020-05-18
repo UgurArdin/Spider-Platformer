@@ -15,9 +15,13 @@ public class GrappleBullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Grappable")
         {
+            Debug.Log(grapple.shootPoint.eulerAngles);
+            Quaternion angle = Quaternion.identity;
+            angle.eulerAngles = grapple.shootPoint.eulerAngles + new Vector3(0, 0, -90f);
             ContactPoint2D contact = collision.contacts[0];
             GameObject bulletInstance = Instantiate(grappableObject, contact.point, Quaternion.identity);
-            GameObject webPrefab = Instantiate(webParticle, contact.point, grapple.shootPoint.rotation);
+            GameObject webPrefab = Instantiate(webParticle, contact.point, angle);
+            Debug.Log(webPrefab.transform.eulerAngles);
             webPrefab.transform.parent = collision.transform;
             bulletInstance.transform.parent = collision.transform;
             grapple.TargetHit(bulletInstance);

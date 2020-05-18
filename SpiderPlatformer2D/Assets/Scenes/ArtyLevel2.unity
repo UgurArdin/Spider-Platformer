@@ -15249,7 +15249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 2261164639111186254, guid: 0c420cece2abcea4cb4579dc5208a272, type: 3}
-  bulletSpeed: 3000
+  bulletSpeed: 2500
   playerController: {fileID: 6661531606793494686}
   shootPoint: {fileID: 1592134219}
   lineRenderer: {fileID: 1592134222}
