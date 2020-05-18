@@ -17,7 +17,7 @@ public class GrappleBullet : MonoBehaviour
         {
             ContactPoint2D contact = collision.contacts[0];
             GameObject bulletInstance = Instantiate(grappableObject, contact.point, Quaternion.identity);
-            GameObject webPrefab = Instantiate(webParticle, contact.point, Quaternion.identity);
+            GameObject webPrefab = Instantiate(webParticle, contact.point, transform.rotation);
             grapple.TargetHit(bulletInstance);
 
             Destroy(gameObject);

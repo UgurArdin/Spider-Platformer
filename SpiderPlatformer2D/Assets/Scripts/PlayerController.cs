@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float grapplePullSpeed = 3f;
     [SerializeField] float grappleForce = 3f;
     [SerializeField] float grappleRadious;
+    [SerializeField] float maxGrappleForce;
+
 
     [HideInInspector] public float gravityDefaultValue;
 
@@ -68,7 +70,10 @@ public class PlayerController : MonoBehaviour
                     if (distanceBetweenObjectAndPlayer >= 2f)
                     {
                         Vector3 direction = targetInstance.transform.position - transform.position;
+
                         //transform.position += direction * Time.deltaTime * grapplePullSpeed;
+                        direction.x = Mathf.Clamp(direction.x, -maxGrappleForce, maxGrappleForce);
+                        direction.y = Mathf.Clamp(direction.y, -maxGrappleForce, maxGrappleForce);
                         rigidBody.AddForce(direction * grappleForce);
                         grapplePullSpeed -= Time.deltaTime*4f;
                         if(grapplePullSpeed<=0.5f)
@@ -115,13 +120,13 @@ public class PlayerController : MonoBehaviour
         {
             WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(wallDistance, 0), wallDistance, groundMask);
             //Debug.DrawRay(transform.position, new Vector2(wallDistance, 0), Color.black);
-            Debug.Log("Facing right");
+
         }
         else 
         {
             WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(-wallDistance, 0), wallDistance, groundMask);
             //Debug.DrawRay(transform.position, new Vector2(-wallDistance, 0), Color.black);
-            Debug.Log("Facing left");
+
         }
        
         if (WallCheckHit && NotInGround() && PlayerHasVelocity())
@@ -160,6 +165,7 @@ public class PlayerController : MonoBehaviour
 
     private bool NotInGround()
     {
+
         return !playerFeetCollider2D.IsTouchingLayers(LayerMask.GetMask("Ground"));
     }
 
