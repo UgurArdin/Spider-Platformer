@@ -8,6 +8,9 @@ TagManager:
   - Ground
   - Grappable
   - Web
+  - UpGround
+  - RightGround
+  - LeftGround
   layers:
   - Default
   - TransparentFX

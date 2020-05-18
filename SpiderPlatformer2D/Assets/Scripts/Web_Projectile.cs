@@ -11,7 +11,7 @@ public class Web_Projectile : MonoBehaviour
     public Transform webTrailPrefab;
 
     float timeToWeb;
-    public Transform webPoint;
+    [SerializeField] Transform webPoint;
     public GameObject bulletPref;
 
     public float bulletforce = 20f;
@@ -49,7 +49,7 @@ public class Web_Projectile : MonoBehaviour
             mousePos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
             Vector2 webPointPos = new Vector2(webPoint.position.x, webPoint.position.y);
             RaycastHit2D hit = Physics2D.Raycast(webPointPos, mousePos - webPointPos, 100, whatToHit);
-            Effect();
+            
             Debug.DrawLine(webPointPos, (mousePos - webPointPos) * 100, Color.cyan);
             if(hit.collider!= null)
             {
@@ -65,9 +65,6 @@ public class Web_Projectile : MonoBehaviour
         
         }
 
-        void Effect()
-        {
-            Instantiate(webTrailPrefab, webPoint.position, webPoint.rotation);
-        }
+      
     }
 }
