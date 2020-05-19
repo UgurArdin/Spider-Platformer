@@ -16,11 +16,11 @@ public class PlayerController : MonoBehaviour
 
     //Component Referances
     Rigidbody2D rigidBody;
-    Animator animator;
     CapsuleCollider2D bodyCollider2D;
     BoxCollider2D playerFeetCollider2D;
     Grapple grapple;
     float health;
+    public Animator animator;
     [SerializeField] GameObject webSnapParticle;
 
 
@@ -43,7 +43,6 @@ public class PlayerController : MonoBehaviour
     {
         grapple = GetComponentInChildren<Grapple>();
         rigidBody = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
         bodyCollider2D = GetComponent<CapsuleCollider2D>();
         playerFeetCollider2D = GetComponent<BoxCollider2D>();
         gravityDefaultValue = rigidBody.gravityScale;
@@ -189,24 +188,24 @@ public class PlayerController : MonoBehaviour
     {
         if (rigidBody.velocity.y > 0)
         {
-            animator.SetBool("IsJumping", true);
+            animator.SetBool("isJumping", true);
             isJumping = true;
         }
 
         else
         {
-            animator.SetBool("IsJumping", false);
+            animator.SetBool("isJumping", false);
             isJumping = false;
         }
 
         if (rigidBody.velocity.y < -.1f)
         {
-            animator.SetBool("IsFalling", true);
+            animator.SetBool("isFalling", true);
         }
 
         else
         {
-            animator.SetBool("IsFalling", false);
+            animator.SetBool("isFalling", false);
         }
     }
     private void FlipSprite()
