@@ -28,7 +28,6 @@ public class GrappleBullet : MonoBehaviour
             }
             if (collision.gameObject.tag == "Pullable")
             {
-                Debug.Log("Pullable");
                 grapple.PullableHit(collision.gameObject);
             }
 

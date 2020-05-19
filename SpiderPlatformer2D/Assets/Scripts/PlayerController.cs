@@ -8,8 +8,7 @@ public class PlayerController : MonoBehaviour
     //Config
     [SerializeField] float runSpeed = 5f;
     [SerializeField] float jumpSpeed = 5f;
-    [SerializeField] float grapplePullSpeed = 3f;
-    [SerializeField] float grappleForce = 3f;
+    [SerializeField] float grappleForceMultiplier = 3f;
     [SerializeField] float grappleRadious;
     [SerializeField] float maxGrappleForce;
 
@@ -22,8 +21,6 @@ public class PlayerController : MonoBehaviour
     CapsuleCollider2D bodyCollider2D;
     BoxCollider2D playerFeetCollider2D;
     Grapple grapple;
-
-    float currentGrappleSpeed;
     float health;
     //State
     bool isAlive = true;
@@ -41,8 +38,6 @@ public class PlayerController : MonoBehaviour
     float mx = 0;
     void Start()
     {
-
-        currentGrappleSpeed = grapplePullSpeed;
         grapple = GetComponentInChildren<Grapple>();
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
@@ -70,64 +65,49 @@ public class PlayerController : MonoBehaviour
                     if (distanceBetweenObjectAndPlayer >= 2f)
                     {
                         Vector3 direction = targetInstance.transform.position - transform.position;
-
-                        //transform.position += direction * Time.deltaTime * grapplePullSpeed;
                         direction.x = Mathf.Clamp(direction.x, -maxGrappleForce, maxGrappleForce);
                         direction.y = Mathf.Clamp(direction.y, -maxGrappleForce, maxGrappleForce);
-                        rigidBody.AddForce(direction * grappleForce);
-                        grapplePullSpeed -= Time.deltaTime*4f;
-                        if(grapplePullSpeed<=0.5f)
-                        {
-                            grapplePullSpeed = 0.5f;
-                        }
+                        rigidBody.AddForce(direction * grappleForceMultiplier);
+
                         rigidBody.gravityScale = 0;
                         if (distanceBetweenObjectAndPlayer > grappleRadious)
                         {
-
+                            Debug.Log("grapple over max radious");
                             grapple.target = null;
                             grapple.springJoint.enabled = false;
                             rigidBody.gravityScale = gravityDefaultValue;
-
                         }
                     }
                     else
                     {
-                        grapplePullSpeed = currentGrappleSpeed;
                         rigidBody.gravityScale = gravityDefaultValue;
                         GetComponentInChildren<Grapple>().DisableSprintJoint();
-
                     }
-                    
                 }
-
             }
+
             if (grapple.GetIsPulling())
             {
                 if (grapple.GetTarget() != null)
                 {
-                    Debug.Log("GetIsPulling");
                     float distanceBetweenObjectAndPlayer = Vector3.Distance(grapple.GetTargetPos(), transform.position);
                     GameObject targetInstance = grapple.GetTarget();
                     if (distanceBetweenObjectAndPlayer >= 2f)
                     {
-                        Debug.Log("Force");
                         Vector3 direction = targetInstance.transform.position - transform.position;
                         targetInstance.GetComponent<Rigidbody2D>().AddForce(-direction * 5);
                         if (distanceBetweenObjectAndPlayer > grappleRadious)
                         {
                             grapple.target = null;
+                            Debug.Log("pulling over");
                             grapple.springJoint.enabled = false;
-                            Debug.Log("Pulling over");
                         }
                     }
                     else
                     {
                         GetComponentInChildren<Grapple>().DisableSprintJoint();
-
                     }
-
                 }
-
             }
         }
         
@@ -241,9 +221,6 @@ public class PlayerController : MonoBehaviour
         }
         return false;
     }
-    public void ResetGrappleSpeed()
-    {
-        grapplePullSpeed = currentGrappleSpeed;
-    }
+
     
 }

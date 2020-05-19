@@ -37,7 +37,6 @@ public class Grapple : MonoBehaviour
             target = null;
             DisableSprintJoint();
             GetComponentInParent<Rigidbody2D>().gravityScale = playerController.gravityDefaultValue;
-            playerController.ResetGrappleSpeed();
             isGrappled = false;
             isPulling = false;
         }
