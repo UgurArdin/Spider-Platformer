@@ -11,6 +11,7 @@ TagManager:
   - UpGround
   - RightGround
   - LeftGround
+  - Pullable
   layers:
   - Default
   - TransparentFX

@@ -101,6 +101,34 @@ public class PlayerController : MonoBehaviour
                 }
 
             }
+            if (grapple.GetIsPulling())
+            {
+                if (grapple.GetTarget() != null)
+                {
+                    Debug.Log("GetIsPulling");
+                    float distanceBetweenObjectAndPlayer = Vector3.Distance(grapple.GetTargetPos(), transform.position);
+                    GameObject targetInstance = grapple.GetTarget();
+                    if (distanceBetweenObjectAndPlayer >= 2f)
+                    {
+                        Debug.Log("Force");
+                        Vector3 direction = targetInstance.transform.position - transform.position;
+                        targetInstance.GetComponent<Rigidbody2D>().AddForce(-direction * 5);
+                        if (distanceBetweenObjectAndPlayer > grappleRadious)
+                        {
+                            grapple.target = null;
+                            grapple.springJoint.enabled = false;
+                            Debug.Log("Pulling over");
+                        }
+                    }
+                    else
+                    {
+                        GetComponentInChildren<Grapple>().DisableSprintJoint();
+
+                    }
+
+                }
+
+            }
         }
         
     }

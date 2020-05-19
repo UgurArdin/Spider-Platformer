@@ -7,7 +7,7 @@ public class Grapple : MonoBehaviour
 {
     [SerializeField] GameObject bullet;
     [SerializeField] float bulletSpeed = 2000f;
-    [SerializeField] PlayerController playerController;
+    public PlayerController playerController;
 
     public Transform shootPoint;
     public LineRenderer lineRenderer;
@@ -15,6 +15,7 @@ public class Grapple : MonoBehaviour
 
     float timeToGrapple = 0;
      bool isGrappled = false;
+    bool isPulling = false;
     [HideInInspector] public GameObject target;
 
 
@@ -26,7 +27,7 @@ public class Grapple : MonoBehaviour
     private void Update()
     {
         RotateGrapple();
-        if (Input.GetMouseButton(1)&&!isGrappled)
+        if (Input.GetMouseButton(1)&&!isGrappled && !isPulling)
         {
             Shoot();
         }
@@ -38,6 +39,7 @@ public class Grapple : MonoBehaviour
             GetComponentInParent<Rigidbody2D>().gravityScale = playerController.gravityDefaultValue;
             playerController.ResetGrappleSpeed();
             isGrappled = false;
+            isPulling = false;
         }
         if (target != null)
         {
@@ -76,8 +78,15 @@ public class Grapple : MonoBehaviour
         springJoint.enabled = true;
         springJoint.connectedBody = target.GetComponent<Rigidbody2D>();
         lineRenderer.enabled = true;
-        //playerController.GetComponent<Rigidbody2D>().AddForce(target.transform.position * 500f);
         isGrappled = true;
+    }
+    public void PullableHit(GameObject hit) //when our hidden bullet hits the object with Grappable tag , we will call this method from GrappleBullet
+    {
+        target = hit;
+        springJoint.enabled = true;
+        springJoint.connectedBody = target.GetComponent<Rigidbody2D>();
+        lineRenderer.enabled = true;
+        isPulling = true;
     }
     private Vector2 GetMousePos()
     {
@@ -86,6 +95,10 @@ public class Grapple : MonoBehaviour
     public bool GetIsGrapple()
     {
         return isGrappled;
+    }
+    public bool GetIsPulling()
+    {
+        return isPulling;
     }
     public GameObject GetTarget()
     {
