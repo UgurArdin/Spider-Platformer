@@ -33,6 +33,7 @@ public class Grapple : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(1)) // Added later
         {
+            playerController.DestroyBoxes();
             timeToGrapple = 0;
             target = null;
             DisableSprintJoint();
