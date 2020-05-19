@@ -106,6 +106,7 @@ public class PlayerController : MonoBehaviour
                             GameObject particle = Instantiate(webSnapParticle, (transform.position + grapple.target.transform.position) / 2,
  Quaternion.identity);
                             grapple.target = null;
+                            DestroyBoxes();
                             Destroy(particle, 1);
                             grapple.springJoint.enabled = false;
                         }
@@ -228,6 +229,16 @@ public class PlayerController : MonoBehaviour
         }
         return false;
     }
-
+    public void DestroyBoxes()
+    {
+        var boxes = FindObjectsOfType<Boxes>();
+        if(boxes!=null)
+        {
+            foreach (Boxes box in boxes)
+            {
+                Destroy(box.gameObject);
+            }
+        }     
+    }
     
 }
