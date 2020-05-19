@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float grappleRadious;
     [SerializeField] float maxGrappleForce;
 
-
     [HideInInspector] public float gravityDefaultValue;
 
     //Component Referances
@@ -22,6 +21,9 @@ public class PlayerController : MonoBehaviour
     BoxCollider2D playerFeetCollider2D;
     Grapple grapple;
     float health;
+    [SerializeField] GameObject webSnapParticle;
+
+
     //State
     bool isAlive = true;
     bool isJumping;
@@ -36,6 +38,7 @@ public class PlayerController : MonoBehaviour
     RaycastHit2D WallCheckHit;
     float jumpTime;
     float mx = 0;
+
     void Start()
     {
         grapple = GetComponentInChildren<Grapple>();
@@ -72,7 +75,9 @@ public class PlayerController : MonoBehaviour
                         rigidBody.gravityScale = 0;
                         if (distanceBetweenObjectAndPlayer > grappleRadious)
                         {
-                            Debug.Log("grapple over max radious");
+                            GameObject particle = Instantiate(webSnapParticle,(transform.position+ grapple.target.transform.position)/2, 
+                                Quaternion.identity);
+                            Destroy(particle,1);
                             grapple.target = null;
                             grapple.springJoint.enabled = false;
                             rigidBody.gravityScale = gravityDefaultValue;
@@ -98,8 +103,10 @@ public class PlayerController : MonoBehaviour
                         targetInstance.GetComponent<Rigidbody2D>().AddForce(-direction * 5);
                         if (distanceBetweenObjectAndPlayer > grappleRadious)
                         {
+                            GameObject particle = Instantiate(webSnapParticle, (transform.position + grapple.target.transform.position) / 2,
+ Quaternion.identity);
                             grapple.target = null;
-                            Debug.Log("pulling over");
+                            Destroy(particle, 1);
                             grapple.springJoint.enabled = false;
                         }
                     }
