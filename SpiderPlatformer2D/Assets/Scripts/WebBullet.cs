@@ -8,7 +8,7 @@ public class WebBullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Grappable")
+        if (collision.gameObject.tag == "Grappable"|| collision.gameObject.tag == "Pullable")
         {
             ContactPoint2D contact = collision.contacts[0];
             GameObject bulletInstance = Instantiate(hitParticle, contact.point, Quaternion.identity);
