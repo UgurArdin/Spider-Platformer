@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float grappleForceMultiplier = 3f;
     [SerializeField] float grappleRadious;
     [SerializeField] float maxGrappleForce;
+    [SerializeField] float playerHealth;
+
+
 
     [HideInInspector] public float gravityDefaultValue;
 
@@ -19,8 +23,9 @@ public class PlayerController : MonoBehaviour
     CapsuleCollider2D bodyCollider2D;
     BoxCollider2D playerFeetCollider2D;
     Grapple grapple;
-    float health;
     public Animator animator;
+    public Slider HealthBar;
+    public GameObject DeadMenu;
     [SerializeField] GameObject webSnapParticle;
 
 
@@ -206,6 +211,18 @@ public class PlayerController : MonoBehaviour
         else
         {
             animator.SetBool("isFalling", false);
+        }
+    }
+    public void UpdateHealth(int damage)
+    {
+        
+        playerHealth -= damage;
+        HealthBar.value = playerHealth;
+        if (HealthBar.value <= 0&& isAlive)
+        {
+            isAlive = false;
+            animator.SetTrigger("Die");
+            DeadMenu.SetActive(true);
         }
     }
     private void FlipSprite()

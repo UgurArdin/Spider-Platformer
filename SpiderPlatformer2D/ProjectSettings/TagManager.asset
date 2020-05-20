@@ -12,6 +12,8 @@ TagManager:
   - RightGround
   - LeftGround
   - Pullable
+  - GrappleBullet
+  - WebBullet
   layers:
   - Default
   - TransparentFX
