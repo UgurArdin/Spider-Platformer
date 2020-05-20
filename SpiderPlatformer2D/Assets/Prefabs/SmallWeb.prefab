@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_LightType: 0
-  m_BlendStyleIndex: 0
+  m_BlendStyleIndex: 2
   m_FalloffIntensity: 0.854
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 0.5
@@ -134,7 +134,7 @@ MonoBehaviour:
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
-  m_AlphaBlendOnOverlap: 0
+  m_AlphaBlendOnOverlap: 1
   m_ShadowIntensity: 0
   m_ShadowVolumeIntensity: 0
   m_PointLightInnerAngle: 360
