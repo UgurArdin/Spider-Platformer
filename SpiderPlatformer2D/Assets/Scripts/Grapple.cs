@@ -49,6 +49,11 @@ public class Grapple : MonoBehaviour
         else
         {
             lineRenderer.enabled = false;
+            var webs = FindObjectsOfType<WebPrefab>();
+            foreach(WebPrefab web in webs)
+            {
+                Destroy(web.gameObject);
+            }
         }
        
        
