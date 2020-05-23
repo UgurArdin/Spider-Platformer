@@ -1,27 +1,75 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Boss : MonoBehaviour
 {
 
-	public Transform player;
-    public bool grappling;
+	public GameObject player;
+    [HideInInspector]public bool grappling;
+    [HideInInspector] public bool isFlipped = false;
 
-    public bool isFlipped = false;
+    public Slider bossHealthSlider;
+    public float bossHealth;
+    public int attackDamage = 20;
+    public int enragedAttackDamage = 40;
 
+    public Vector3 attackOffset;
+    public float attackRange = 1f;
+    public LayerMask attackMask;
+
+    private void Start()
+    {
+        bossHealthSlider.maxValue = bossHealth;
+    }
+
+    public void Attack()
+    {
+        Vector3 pos = transform.position;
+        pos += transform.right * attackOffset.x;
+        pos += transform.up * attackOffset.y;
+
+        Collider2D colInfo = Physics2D.OverlapCircle(pos, attackRange, attackMask);
+        if (colInfo != null)
+        {
+            colInfo.GetComponent<PlayerController>().UpdateHealth(attackDamage);
+        }
+    }
+
+    public void EnragedAttack()
+    {
+        Vector3 pos = transform.position;
+        pos += transform.right * attackOffset.x;
+        pos += transform.up * attackOffset.y;
+
+        Collider2D colInfo = Physics2D.OverlapCircle(pos, attackRange, attackMask);
+        if (colInfo != null)
+        {
+            colInfo.GetComponent<PlayerController>().UpdateHealth(enragedAttackDamage);
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Vector3 pos = transform.position;
+        pos += transform.right * attackOffset.x;
+        pos += transform.up * attackOffset.y;
+
+        Gizmos.DrawWireSphere(pos, attackRange);
+    }
     public void LookAtPlayer()
     {
         Vector3 flipped = transform.localScale;
         flipped.z *= -1f;
 
-        if (transform.position.x > player.position.x && isFlipped)
+        if (transform.position.x > player.transform.position.x && isFlipped)
         {
             transform.localScale = flipped;
             transform.Rotate(0f, 180f, 0f);
             isFlipped = false;
         }
-        else if (transform.position.x < player.position.x && !isFlipped)
+        else if (transform.position.x < player.transform.position.x && !isFlipped)
         {
             transform.localScale = flipped;
             transform.Rotate(0f, 180f, 0f);
@@ -32,5 +80,18 @@ public class Boss : MonoBehaviour
     {
         return transform.position;
     }
-	
+    public void getDamage()
+    {
+        if (bossHealth > 0)
+        {
+            bossHealth -= 100;
+            bossHealthSlider.value = bossHealth;
+        }
+        else
+        {
+            //boss dead animation sounds etc.
+            Debug.Log("boss is dead");
+        }
+    }
+
 }

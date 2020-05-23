@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -4040109487886187648}
   - component: {fileID: -1423418674087946627}
   - component: {fileID: 7551537943040337454}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GrappleBullet
   m_TagString: GrappleBullet
   m_Icon: {fileID: 0}
@@ -255,7 +255,7 @@ GameObject:
   m_Component:
   - component: {fileID: 219695334869971072}
   - component: {fileID: 738680875558444654}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WebLight (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

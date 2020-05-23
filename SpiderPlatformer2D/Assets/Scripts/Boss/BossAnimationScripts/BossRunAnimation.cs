@@ -52,10 +52,9 @@ public class BossRunAnimation : StateMachineBehaviour
 
 		if (Vector2.Distance(player.position, rb.position) <= meleeAttackRange&& !boss.grappling)
 		{
-
 			animator.SetTrigger("Attack");
 		}
-		if (Vector2.Distance(player.position, rb.position) >= grappleRange)
+		if (Vector2.Distance(player.position, rb.position) <= grappleRange && Vector2.Distance(player.position, rb.position) > meleeAttackRange+6)
 		{
 			boss.grappling = true;
 			animator.SetTrigger("GrappleAttack");

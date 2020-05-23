@@ -23,8 +23,6 @@ public class PlayerController : MonoBehaviour
 
     //Component Referances
     Rigidbody2D rigidBody;
-    CapsuleCollider2D bodyCollider2D;
-    BoxCollider2D playerFeetCollider2D;
     Grapple grapple;
     public Animator animator;
     public Slider HealthBar;
@@ -56,8 +54,6 @@ public class PlayerController : MonoBehaviour
     {
         grapple = GetComponentInChildren<Grapple>();
         rigidBody = GetComponent<Rigidbody2D>();
-        bodyCollider2D = GetComponent<CapsuleCollider2D>();
-        playerFeetCollider2D = GetComponent<BoxCollider2D>();
         gravityDefaultValue = rigidBody.gravityScale;
     }
 
@@ -125,7 +121,7 @@ public class PlayerController : MonoBehaviour
                         if (distanceBetweenObjectAndPlayer > grappleRadious)
                         {
                             GameObject particle = Instantiate(webSnapParticle, (transform.position + grapple.target.transform.position) / 2,
- Quaternion.identity);
+                            Quaternion.identity);
                             grapple.target = null;
                             DestroyBoxes();
                             Destroy(particle, 1);
@@ -141,7 +137,10 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-
+    private void FixedUpdate()
+    {
+        getIfGrounded();
+    }
     private  void InteractionWithBoss()
     {
         if (boss == null) return;
@@ -152,10 +151,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-        getIfGrounded();
-    }
+
     private void WallJump()
     {     
         mx = Input.GetAxis("Horizontal");
