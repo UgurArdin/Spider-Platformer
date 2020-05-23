@@ -23,7 +23,7 @@ public class Glide : MonoBehaviour
 
     void Update()
     {
-        if (rb.velocity.y <0)
+        if (rb.velocity.y < -0.1f)
         {
        
             
@@ -33,6 +33,7 @@ public class Glide : MonoBehaviour
 
                 if (glideGravity == false)
                 {
+                    Debug.Log(rb.velocity.y);
                     glideGravity = true;
                     glideTrail.SetActive(true);
                     GetComponent<Rigidbody2D>().gravityScale = defaultGravity * glidingGravity;

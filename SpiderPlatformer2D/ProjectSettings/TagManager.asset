@@ -14,6 +14,8 @@ TagManager:
   - Pullable
   - GrappleBullet
   - WebBullet
+  - GrappleWeb
+  - GrabbleWeb
   layers:
   - Default
   - TransparentFX
@@ -26,7 +28,7 @@ TagManager:
   - Ground
   - Background
   - Web
-  - 
+  - Player
   - 
   - 
   - 

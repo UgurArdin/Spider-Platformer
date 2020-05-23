@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     //Config
-    [SerializeField] float runSpeed = 5f;
-    [SerializeField] float jumpSpeed = 5f;
-    [SerializeField] float grappleForceMultiplier = 3f;
+    [SerializeField] float runSpeed;
+    [SerializeField] float jumpSpeed ;
+    [SerializeField] float grappleForceMultiplier;
     [SerializeField] float grappleRadious;
     [SerializeField] float maxGrappleForce;
     [SerializeField] float playerHealth;
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     bool isJumping;
     bool isFacingRight;
     bool canJump;
-    bool NotInGround;
+    bool isGrounded;
 
     [Header("Wall Jump")]
     public LayerMask groundMask;
@@ -88,6 +88,14 @@ public class PlayerController : MonoBehaviour
                         {
                             GameObject particle = Instantiate(webSnapParticle,(transform.position+ grapple.target.transform.position)/2, 
                                 Quaternion.identity);
+                            var webBullet = GameObject.FindGameObjectsWithTag("GrappleWeb");
+                            if (webBullet != null)
+                            {
+                                foreach (GameObject web in webBullet)
+                                {
+                                    Destroy(web.gameObject,2);
+                                }
+                            }
                             Destroy(particle,1);
                             grapple.target = null;
                             grapple.springJoint.enabled = false;
@@ -160,7 +168,7 @@ public class PlayerController : MonoBehaviour
 
             }
 
-            if (WallCheckHit && NotInGround && PlayerHasVelocity())
+            if (WallCheckHit && !isGrounded && PlayerHasVelocity())
             {
                 isWallSliding = true;
                 jumpTime = Time.time + wallJumpTime;
@@ -191,7 +199,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) ||isWallSliding &&Input.GetKeyDown(KeyCode.Space))
         {
             
-            if (NotInGround && !isWallSliding) 
+            if (!isGrounded && !isWallSliding) 
             { 
                 return; 
             }
@@ -205,7 +213,7 @@ public class PlayerController : MonoBehaviour
     }
     private void getIfGrounded() 
     {
-        NotInGround=!Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, LayerMask.GetMask("Ground"));//aq ugur
+        isGrounded=Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, LayerMask.GetMask("Ground"));//aq ugur
         animator.SetBool("isJumping", false);
         isJumping = false;
 
@@ -213,7 +221,7 @@ public class PlayerController : MonoBehaviour
 
     void ManageJumpingAndFallingAnim()
     {
-        if (rigidBody.velocity.y > 0&& NotInGround)
+        if (rigidBody.velocity.y > 0&& !isGrounded)
         {
             animator.SetBool("isJumping", true);
         }

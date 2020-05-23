@@ -7,6 +7,7 @@ public class GrappleBullet : MonoBehaviour
     private Grapple grapple;
     [SerializeField] GameObject grappableObject;
     [SerializeField] GameObject webParticle;
+
     private void Start()
     {
       

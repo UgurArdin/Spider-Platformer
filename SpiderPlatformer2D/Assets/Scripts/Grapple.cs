@@ -33,6 +33,14 @@ public class Grapple : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(1)) // Added later
         {
+            var webBullet = GameObject.FindGameObjectsWithTag("GrappleWeb");
+            if (webBullet != null)
+            {
+                foreach (GameObject web in webBullet)
+                {
+                    Destroy(web.gameObject,2f);
+                }
+            }
             playerController.DestroyBoxes();
             timeToGrapple = 0;
             target = null;
@@ -49,11 +57,6 @@ public class Grapple : MonoBehaviour
         else
         {
             lineRenderer.enabled = false;
-            var webs = FindObjectsOfType<WebPrefab>();
-            foreach(WebPrefab web in webs)
-            {
-                Destroy(web.gameObject);
-            }
         }
        
        
