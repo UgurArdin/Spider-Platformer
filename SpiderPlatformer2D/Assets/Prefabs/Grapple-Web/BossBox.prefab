@@ -12,9 +12,8 @@ GameObject:
   - component: {fileID: 6148945359387290419}
   - component: {fileID: 6148945359387290380}
   - component: {fileID: 6148945359387290381}
-  - component: {fileID: -8422184035660252265}
   m_Layer: 0
-  m_Name: Boxes
+  m_Name: BossBox
   m_TagString: Grappable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,7 +117,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6148945359387290382}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -131,15 +130,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-8422184035660252265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6148945359387290382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eaf0f9eccc4fec847b9e5ea853642300, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
