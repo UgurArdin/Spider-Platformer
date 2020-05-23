@@ -20,6 +20,7 @@ public class BeeEnemy : MonoBehaviour
     int currentWaypoint = 0;
     bool reachedEndOfPath= false;
     bool isChasing=false;
+    bool isDead = false;
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -29,7 +30,7 @@ public class BeeEnemy : MonoBehaviour
     }
     void UpdatePath()
     {
-        if(seeker.IsDone()&& isChasing)
+        if(seeker.IsDone()&& isChasing &&!isDead)
         seeker.StartPath(rb.position, target.position, OnPathComplete);
     }
     void OnPathComplete(Path p)
@@ -44,11 +45,11 @@ public class BeeEnemy : MonoBehaviour
     void FixedUpdate()
     {
         float distance = Vector3.Distance(target.position, transform.position);
-        if (distance < maxChaseRange)
+        if (distance < maxChaseRange && !isDead)
         {
             isChasing = true;
         }
-        if (isChasing) 
+        if (isChasing&& !isDead) 
         {
             if (path == null)
             {
@@ -86,7 +87,7 @@ public class BeeEnemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag == "Player"&& !isDead)
         {
             GameObject particle = Instantiate(beeAttackParticle,col.transform.position, Quaternion.identity);
             Destroy(particle, 0.7f);
@@ -94,6 +95,7 @@ public class BeeEnemy : MonoBehaviour
         }
         if (col.gameObject.tag == "WebBullet")
         {
+            isDead = true;
             anim.SetTrigger("Die");
             Destroy(gameObject, 0.7f);
             

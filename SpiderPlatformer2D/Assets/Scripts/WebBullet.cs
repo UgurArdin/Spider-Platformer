@@ -12,7 +12,7 @@ public class WebBullet : MonoBehaviour
         {
             ContactPoint2D contact = collision.contacts[0];
             GameObject bulletInstance = Instantiate(hitParticle, contact.point, Quaternion.identity);
-            bulletInstance.transform.parent = collision.transform;
+            bulletInstance.transform.SetParent(collision.gameObject.transform);
             gameObject.SetActive(false);
             Destroy(gameObject);
         }
