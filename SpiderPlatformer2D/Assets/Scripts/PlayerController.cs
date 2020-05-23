@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float grappleRadious;
     [SerializeField] float maxGrappleForce;
     [SerializeField] float playerHealth;
+    [SerializeField] float groundCheckRadius;
 
 
 
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
     public Slider HealthBar;
     public GameObject DeadMenu;
     [SerializeField] GameObject webSnapParticle;
+    [SerializeField] Transform groundCheck;
 
 
     //State
@@ -35,6 +37,7 @@ public class PlayerController : MonoBehaviour
     bool isJumping;
     bool isFacingRight;
     bool canJump;
+    bool NotInGround;
 
     [Header("Wall Jump")]
     public LayerMask groundMask;
@@ -129,10 +132,14 @@ public class PlayerController : MonoBehaviour
         
     }
 
+    private void FixedUpdate()
+    {
+        getIfGrounded();
+    }
     private void WallJump()
     {     
-            mx = Input.GetAxis("Horizontal");
-            if (mx < 0)
+        mx = Input.GetAxis("Horizontal");
+        if (mx < 0)
             {
                 isFacingRight = false;
             }
@@ -153,7 +160,7 @@ public class PlayerController : MonoBehaviour
 
             }
 
-            if (WallCheckHit && NotInGround() && PlayerHasVelocity())
+            if (WallCheckHit && NotInGround && PlayerHasVelocity())
             {
                 isWallSliding = true;
                 jumpTime = Time.time + wallJumpTime;
@@ -180,27 +187,35 @@ public class PlayerController : MonoBehaviour
     }
     private void Jump()
     {
-        if (NotInGround() &&!isWallSliding) { return; }
 
         if (Input.GetKeyDown(KeyCode.Space) ||isWallSliding &&Input.GetKeyDown(KeyCode.Space))
         {
-            Vector2 jumpForce = new Vector2(0, jumpSpeed);
-            rigidBody.velocity += jumpForce;
+            
+            if (NotInGround && !isWallSliding) 
+            { 
+                return; 
+            }
+            else
+            {
+                isJumping = true;
+                Vector2 jumpForce = new Vector2(0, jumpSpeed);
+                rigidBody.velocity += jumpForce;
+            }
         }
     }
-
-    private bool NotInGround()
+    private void getIfGrounded() 
     {
+        NotInGround=!Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, LayerMask.GetMask("Ground"));//aq ugur
+        animator.SetBool("isJumping", false);
+        isJumping = false;
 
-        return !playerFeetCollider2D.IsTouchingLayers(LayerMask.GetMask("Ground"));
     }
 
     void ManageJumpingAndFallingAnim()
     {
-        if (rigidBody.velocity.y > 0)
+        if (rigidBody.velocity.y > 0&& NotInGround)
         {
             animator.SetBool("isJumping", true);
-            isJumping = true;
         }
 
         else

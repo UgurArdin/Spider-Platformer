@@ -20442,6 +20442,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 706728729}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &713200332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 713200333}
+  m_Layer: 0
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &713200333
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713200332}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.68, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 989001947}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &717584110 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1677987064582420604, guid: 60c1f48fd1981cd44acf1d490842ac93,
@@ -44059,6 +44089,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1896273490747341746, guid: 213fb6ddace762b4c8eb2044636feec6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896273490747341746, guid: 213fb6ddace762b4c8eb2044636feec6,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.07084884
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896273490747341746, guid: 213fb6ddace762b4c8eb2044636feec6,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.6115509
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896273490747341746, guid: 213fb6ddace762b4c8eb2044636feec6,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 1.1260911
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896273490747341746, guid: 213fb6ddace762b4c8eb2044636feec6,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.064725235
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896273490747341747, guid: 213fb6ddace762b4c8eb2044636feec6,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896273490747341747, guid: 213fb6ddace762b4c8eb2044636feec6,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1896273490747341752, guid: 213fb6ddace762b4c8eb2044636feec6,
         type: 3}
       propertyPath: m_Name
@@ -44088,6 +44153,16 @@ PrefabInstance:
         type: 3}
       propertyPath: maxGrappleForce
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896273490747341757, guid: 213fb6ddace762b4c8eb2044636feec6,
+        type: 3}
+      propertyPath: groundCheck
+      value: 
+      objectReference: {fileID: 713200333}
+    - target: {fileID: 1896273490747341757, guid: 213fb6ddace762b4c8eb2044636feec6,
+        type: 3}
+      propertyPath: groundCheckRadius
+      value: 0.05
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 213fb6ddace762b4c8eb2044636feec6, type: 3}

@@ -14,7 +14,7 @@ public class Grapple : MonoBehaviour
     public SpringJoint2D springJoint;
 
     float timeToGrapple = 0;
-     bool isGrappled = false;
+    [HideInInspector] public bool isGrappled = false;
     bool isPulling = false;
     [HideInInspector] public GameObject target;
 
