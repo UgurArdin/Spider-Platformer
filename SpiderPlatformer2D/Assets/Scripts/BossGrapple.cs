@@ -7,7 +7,7 @@ public class BossGrapple : MonoBehaviour
 {
     [SerializeField] GameObject bullet;
     [SerializeField] float bulletSpeed;
-    [SerializeField] Transform shootPoint;
+    public Transform shootPoint;
     public LineRenderer lineRenderer;
     public SpringJoint2D springJoint;
 
@@ -43,13 +43,20 @@ public class BossGrapple : MonoBehaviour
 
     public void Shoot(Transform playerTransform)
     {
-        Vector3 difference = playerTransform.position - shootPoint.position;
-        float angleZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angleZ);
-        GameObject bulletInstance = Instantiate(bullet, shootPoint.position, Quaternion.identity);
-        bulletInstance.GetComponent<Rigidbody2D>().AddForce(shootPoint.right * bulletSpeed);
-        Destroy(bulletInstance, 0.6f);//grappleRangeLimiter
-        StartCoroutine(DeactivateBossGrapple(2f));
+        if (!isGrappled) {
+            
+            Vector3 difference = playerTransform.position - shootPoint.position;
+            float angleZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(0, 0, angleZ);
+            GameObject bulletInstance = Instantiate(bullet, shootPoint.position, Quaternion.identity);
+            bulletInstance.GetComponent<Rigidbody2D>().AddForce(shootPoint.right * bulletSpeed);
+            bulletInstance.GetComponent<BossGrappleBullet>().SetGrapple(this);
+            
+            Destroy(bulletInstance, 0.6f);//grappleRangeLimiter
+            isGrappled = true;
+            StartCoroutine(DeactivateBossGrapple(2f));
+
+        }
     }
 
     IEnumerator DeactivateBossGrapple(float waitSecond)
