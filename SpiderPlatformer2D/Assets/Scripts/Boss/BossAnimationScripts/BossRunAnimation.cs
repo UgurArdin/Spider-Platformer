@@ -17,10 +17,27 @@ public class BossRunAnimation : StateMachineBehaviour
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
+		animator.ResetTrigger("GrappleAttack");
 		player = GameObject.FindGameObjectWithTag("Player").transform;
 		rb = animator.GetComponent<Rigidbody2D>();
 		boss = animator.GetComponent<Boss>();
 		bossGrapple = animator.GetComponentInChildren<BossGrapple>();
+		var boxes = FindObjectsOfType<BossBox>();
+		if (boxes != null)
+		{
+			foreach (BossBox box in boxes)
+			{
+				Destroy(box.gameObject);
+			}
+		}
+		var webs = GameObject.FindGameObjectsWithTag("BossGrappleWeb");
+		if (webs != null)
+		{
+			foreach (GameObject web in webs)
+			{
+				Destroy(web);
+			}
+		}
 
 	}
 
@@ -33,14 +50,16 @@ public class BossRunAnimation : StateMachineBehaviour
 		Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
 		rb.MovePosition(newPos);
 
-		if (Vector2.Distance(player.position, rb.position) <= meleeAttackRange)
+		if (Vector2.Distance(player.position, rb.position) <= meleeAttackRange&& !boss.grappling)
 		{
+
 			animator.SetTrigger("Attack");
 		}
 		if (Vector2.Distance(player.position, rb.position) >= grappleRange)
 		{
+			boss.grappling = true;
 			animator.SetTrigger("GrappleAttack");
-			bossGrapple.Shoot(player);
+			
 		}
 	}
 

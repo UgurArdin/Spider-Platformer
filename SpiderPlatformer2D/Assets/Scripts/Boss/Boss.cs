@@ -6,8 +6,9 @@ public class Boss : MonoBehaviour
 {
 
 	public Transform player;
+    public bool grappling;
 
-	public bool isFlipped = false;
+    public bool isFlipped = false;
 
     public void LookAtPlayer()
     {

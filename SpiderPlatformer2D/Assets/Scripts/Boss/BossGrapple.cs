@@ -13,11 +13,12 @@ public class BossGrapple : MonoBehaviour
     [HideInInspector] public bool isGrappled = false;
     bool isPulling = false;
     [HideInInspector] public GameObject target;
-
+    GameObject playerObject;    
 
 
     private void Start()
     {
+        playerObject= GameObject.FindGameObjectWithTag("Player");
         lineRenderer.enabled = false;
     }
     private void Update()
@@ -38,13 +39,13 @@ public class BossGrapple : MonoBehaviour
 
     }
 
-    public void Shoot(Transform playerTransform)
+    public void Shoot()
     {
-        if (!isGrappled) {
-            
-            Vector3 difference = playerTransform.position - shootPoint.position;
+        if (!isGrappled) //burdan devam edicez
+        {
+            Vector3 difference = playerObject.transform.position - shootPoint.position;
             float angleZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, angleZ);
+            shootPoint.rotation = Quaternion.Euler(0, 0, angleZ);
             GameObject bulletInstance = Instantiate(bullet, shootPoint.position, Quaternion.identity);
             bulletInstance.GetComponent<Rigidbody2D>().AddForce(shootPoint.right * bulletSpeed);
             bulletInstance.GetComponent<BossGrappleBullet>().SetGrapple(this);

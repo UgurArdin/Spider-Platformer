@@ -17,6 +17,7 @@ TagManager:
   - GrappleWeb
   - GrabbleWeb
   - GrappleBossBullet
+  - BossGrappleWeb
   layers:
   - Default
   - TransparentFX
