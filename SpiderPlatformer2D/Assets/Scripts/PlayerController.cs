@@ -232,7 +232,7 @@ public class PlayerController : MonoBehaviour
             isJumping = false;
         }
 
-        if (rigidBody.velocity.y < -.1f)
+        if (rigidBody.velocity.y < -.1f&&!isGrounded)
         {
             animator.SetBool("isFalling", true);
         }
