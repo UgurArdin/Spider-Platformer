@@ -9,8 +9,6 @@ public class BossGrapple : MonoBehaviour
     [SerializeField] float bulletSpeed;
     public Transform shootPoint;
     public LineRenderer lineRenderer;
-    public SpringJoint2D springJoint;
-
     float timeToGrapple = 0;
     [HideInInspector] public bool isGrappled = false;
     bool isPulling = false;
@@ -21,7 +19,6 @@ public class BossGrapple : MonoBehaviour
     private void Start()
     {
         lineRenderer.enabled = false;
-        springJoint.enabled = false;
     }
     private void Update()
     {
@@ -51,7 +48,6 @@ public class BossGrapple : MonoBehaviour
             GameObject bulletInstance = Instantiate(bullet, shootPoint.position, Quaternion.identity);
             bulletInstance.GetComponent<Rigidbody2D>().AddForce(shootPoint.right * bulletSpeed);
             bulletInstance.GetComponent<BossGrappleBullet>().SetGrapple(this);
-            
             Destroy(bulletInstance, 0.6f);//grappleRangeLimiter
             isGrappled = true;
             StartCoroutine(DeactivateBossGrapple(2f));
@@ -64,15 +60,14 @@ public class BossGrapple : MonoBehaviour
         yield return new WaitForSeconds(waitSecond);
         timeToGrapple = 0;
         target = null;
-        DisableSprintJoint();
-        isGrappled = false;
         isPulling = false;
+        BossGrappleBullet.bossHoldingPlayer = false;
+        yield return new WaitForSeconds(3f);
+        isGrappled = false;
     }
     public void PullableHit(GameObject hit) //when our hidden bullet hits the object with Grappable tag , we will call this method from GrappleBullet
     {
         target = hit;
-        springJoint.enabled = true;
-        springJoint.connectedBody = target.GetComponent<Rigidbody2D>();
         lineRenderer.enabled = true;
         isPulling = true;
     }
@@ -92,9 +87,5 @@ public class BossGrapple : MonoBehaviour
     public Vector3 GetTargetPos()
     {
         return target.transform.position;
-    }
-    public void DisableSprintJoint()
-    {
-        springJoint.enabled = false;
     }
 }

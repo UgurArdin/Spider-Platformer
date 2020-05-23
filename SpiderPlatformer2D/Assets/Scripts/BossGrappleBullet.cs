@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossGrappleBullet : MonoBehaviour
 {
-    public bool bossHoldingPlayer = false;
+    public static bool bossHoldingPlayer = false;
     
     BossGrapple grapple;
     [SerializeField] GameObject grappableObject;
@@ -20,13 +20,13 @@ public class BossGrappleBullet : MonoBehaviour
         {
             //Quaternion angle = Quaternion.identity;
             //angle.eulerAngles = grapple.shootPoint.eulerAngles + new Vector3(0, 0, -90f);
-           
+            bossHoldingPlayer = true;
             ContactPoint2D contact = collision.contacts[0];
             GameObject bulletInstance = Instantiate(grappableObject, contact.point, Quaternion.identity);
             GameObject webPrefab = Instantiate(webParticle, contact.point, Quaternion.identity);
             webPrefab.transform.parent = collision.transform;
             bulletInstance.transform.parent = collision.transform;
-            grapple.PullableHit(bulletInstance);
+            grapple.PullableHit(collision.gameObject);
             
            
 

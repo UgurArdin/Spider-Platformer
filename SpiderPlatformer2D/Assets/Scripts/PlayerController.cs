@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float maxGrappleForce;
     [SerializeField] float playerHealth;
     [SerializeField] float groundCheckRadius;
-
+    [SerializeField] float bossGrappleForceMultiplier;
+    [SerializeField] Boss boss;
 
 
 
@@ -65,6 +66,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isAlive)
         {
+            InteractionWithBoss();
             Run();
             Jump();
             FlipSprite();
@@ -74,7 +76,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (grapple.GetTarget() != null)
                 {
-                    float distanceBetweenObjectAndPlayer = Vector3.Distance(grapple.GetTargetPos(),transform.position);
+                    float distanceBetweenObjectAndPlayer = Vector3.Distance(grapple.GetTargetPos(), transform.position);
                     GameObject targetInstance = grapple.GetTarget();
                     if (distanceBetweenObjectAndPlayer >= 2f)
                     {
@@ -86,17 +88,17 @@ public class PlayerController : MonoBehaviour
                         rigidBody.gravityScale = 0;
                         if (distanceBetweenObjectAndPlayer > grappleRadious)
                         {
-                            GameObject particle = Instantiate(webSnapParticle,(transform.position+ grapple.target.transform.position)/2, 
+                            GameObject particle = Instantiate(webSnapParticle, (transform.position + grapple.target.transform.position) / 2,
                                 Quaternion.identity);
                             var webBullet = GameObject.FindGameObjectsWithTag("GrappleWeb");
                             if (webBullet != null)
                             {
                                 foreach (GameObject web in webBullet)
                                 {
-                                    Destroy(web.gameObject,2);
+                                    Destroy(web.gameObject, 2);
                                 }
                             }
-                            Destroy(particle,1);
+                            Destroy(particle, 1);
                             grapple.target = null;
                             grapple.springJoint.enabled = false;
                             rigidBody.gravityScale = gravityDefaultValue;
@@ -137,7 +139,17 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        
+
+    }
+
+    private  void InteractionWithBoss()
+    {
+        if (boss == null) return;
+        Vector3 direction = boss.BossPos() - transform.position;
+        if(BossGrappleBullet.bossHoldingPlayer)
+        {
+            rigidBody.AddForce(direction*bossGrappleForceMultiplier);
+        }
     }
 
     private void FixedUpdate()

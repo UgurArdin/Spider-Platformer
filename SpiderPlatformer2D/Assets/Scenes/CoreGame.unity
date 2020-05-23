@@ -9575,11 +9575,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4550523820536806, guid: d975e66254b08984ab50d4c39dcb947f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 119.79803
+      value: 119.79802
       objectReference: {fileID: 0}
     - target: {fileID: 4550523820536806, guid: d975e66254b08984ab50d4c39dcb947f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -23.130545
+      value: -23.130606
       objectReference: {fileID: 0}
     - target: {fileID: 4550523820536806, guid: d975e66254b08984ab50d4c39dcb947f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -22622,7 +22622,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 837608447}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0019760132, y: -0.46945763, z: 0}
+  m_LocalPosition: {x: 0.0019836426, y: -0.4693966, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1730158239}
@@ -29339,7 +29339,6 @@ MonoBehaviour:
   bulletSpeed: 20
   shootPoint: {fileID: 1295347119}
   lineRenderer: {fileID: 1295347120}
-  springJoint: {fileID: 1877388497}
   isGrappled: 0
   target: {fileID: 0}
 --- !u!212 &1295347122
@@ -37902,7 +37901,6 @@ GameObject:
   - component: {fileID: 1877388494}
   - component: {fileID: 1877388496}
   - component: {fileID: 1877388495}
-  - component: {fileID: 1877388497}
   m_Layer: 8
   m_Name: spideyy_theMothwfocka
   m_TagString: Grappable
@@ -38030,26 +38028,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!231 &1877388497
-SpringJoint2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1877388491}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 0
-  m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: -0.06, y: 1.71}
-  m_ConnectedAnchor: {x: 144.18349, y: -24.009216}
-  m_AutoConfigureDistance: 0
-  m_Distance: 0.005
-  m_DampingRatio: 0
-  m_Frequency: 0.125
 --- !u!58 &1877388503
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -42561,6 +42539,16 @@ PrefabInstance:
       propertyPath: groundCheckRadius
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 1896273490747341757, guid: 213fb6ddace762b4c8eb2044636feec6,
+        type: 3}
+      propertyPath: bossGrappleForceMultiplier
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896273490747341757, guid: 213fb6ddace762b4c8eb2044636feec6,
+        type: 3}
+      propertyPath: boss
+      value: 
+      objectReference: {fileID: 1877388494}
     - target: {fileID: 1896273490899307574, guid: 213fb6ddace762b4c8eb2044636feec6,
         type: 3}
       propertyPath: m_Layer
