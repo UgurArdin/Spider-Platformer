@@ -9,11 +9,13 @@ public class Boss : MonoBehaviour
 	public GameObject player;
     [HideInInspector]public bool grappling;
     [HideInInspector] public bool isFlipped = false;
+    bool isInVulnearable = false;
 
     public Slider bossHealthSlider;
     public float bossHealth;
     public int attackDamage = 20;
     public int enragedAttackDamage = 40;
+    private float maxBossHealth;
 
     public Vector3 attackOffset;
     public float attackRange = 1f;
@@ -21,6 +23,7 @@ public class Boss : MonoBehaviour
 
     private void Start()
     {
+        maxBossHealth = bossHealth;
         bossHealthSlider.maxValue = bossHealth;
     }
 
@@ -82,10 +85,15 @@ public class Boss : MonoBehaviour
     }
     public void getDamage()
     {
+        if(isInVulnearable) { return; }
         if (bossHealth > 0)
         {
             bossHealth -= 100;
             bossHealthSlider.value = bossHealth;
+        }
+        if(bossHealth<=maxBossHealth/2)
+        {
+            this.gameObject.GetComponent<Animator>().SetBool("isEnrage", true);
         }
         else
         {
