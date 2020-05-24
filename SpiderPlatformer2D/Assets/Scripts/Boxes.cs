@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Boxes : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        PlayerController.DestroyBoxesInPlayerController += DestroyMe;
+        Grapple.DestroyBoxes += DestroyMe;
+    }
+    public void DestroyMe()
+    {
+        Destroy(this.gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        
+        PlayerController.DestroyBoxesInPlayerController -= DestroyMe;
+        Grapple.DestroyBoxes -= DestroyMe;
     }
 }

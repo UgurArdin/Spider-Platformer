@@ -17,7 +17,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float bossGrappleForceMultiplier;
     [SerializeField] Boss boss;
 
-
+    public delegate void DestroySomeStuff();
+    public static event DestroySomeStuff DestroyBoxesInPlayerController;
+    public delegate void DestroyWeb();
+    public static event DestroyWeb DestroyWebs;
 
     [HideInInspector] public float gravityDefaultValue;
 
@@ -86,13 +89,21 @@ public class PlayerController : MonoBehaviour
                         {
                             GameObject particle = Instantiate(webSnapParticle, (transform.position + grapple.target.transform.position) / 2,
                                 Quaternion.identity);
-                            var webBullet = GameObject.FindGameObjectsWithTag("GrappleWeb");
-                            if (webBullet != null)
+                            //var webBullet = GameObject.FindGameObjectsWithTag("GrappleWeb");
+                            //if (webBullet != null)
+                            //{
+                            //    foreach (GameObject web in webBullet)
+                            //    {
+                            //        Destroy(web.gameObject, 2);
+                            //    }
+                            //}
+                            if(DestroyWebs!=null)
                             {
-                                foreach (GameObject web in webBullet)
-                                {
-                                    Destroy(web.gameObject, 2);
-                                }
+                                DestroyWebs();
+                            }
+                            if(DestroyBoxesInPlayerController!=null)
+                            {
+                                DestroyBoxesInPlayerController();
                             }
                             Destroy(particle, 1);
                             grapple.target = null;
@@ -123,7 +134,11 @@ public class PlayerController : MonoBehaviour
                             GameObject particle = Instantiate(webSnapParticle, (transform.position + grapple.target.transform.position) / 2,
                             Quaternion.identity);
                             grapple.target = null;
-                            DestroyBoxes();
+                            //DestroyBoxes(); // change this with event
+                            if(DestroyBoxesInPlayerController!=null)
+                            {
+                                DestroyBoxesInPlayerController();
+                            }
                             Destroy(particle, 1);
                             grapple.springJoint.enabled = false;
                         }
@@ -282,16 +297,6 @@ public class PlayerController : MonoBehaviour
         }
         return false;
     }
-    public void DestroyBoxes()
-    {
-        var boxes = FindObjectsOfType<Boxes>();
-        if(boxes!=null)
-        {
-            foreach (Boxes box in boxes)
-            {
-                Destroy(box.gameObject);
-            }
-        }     
-    }
+   
     
 }

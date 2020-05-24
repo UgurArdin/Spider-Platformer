@@ -9,6 +9,11 @@ public class Grapple : MonoBehaviour
     [SerializeField] float bulletSpeed = 2000f;
     public PlayerController playerController;
 
+    public delegate void DestroySomeStuffInGrapple();
+    public static event DestroySomeStuffInGrapple DestroyBoxes;
+    public delegate void DestroyWeb();
+    public static event DestroyWeb DestroyWebsInGrapple;
+
     public Transform shootPoint;
     public LineRenderer lineRenderer;
     public SpringJoint2D springJoint;
@@ -33,15 +38,23 @@ public class Grapple : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(1)) // Added later
         {
-            var webBullet = GameObject.FindGameObjectsWithTag("GrappleWeb");
-            if (webBullet != null)
+            //var webBullet = GameObject.FindGameObjectsWithTag("GrappleWeb");
+            //if (webBullet != null)
+            //{
+            //    foreach (GameObject web in webBullet)
+            //    {
+            //        Destroy(web.gameObject,2f);
+            //    }
+            //}
+            if(DestroyWebsInGrapple!=null)
             {
-                foreach (GameObject web in webBullet)
-                {
-                    Destroy(web.gameObject,2f);
-                }
+                DestroyWebsInGrapple();
             }
-            playerController.DestroyBoxes();
+            if(DestroyBoxes!=null)
+            {
+                DestroyBoxes();
+            }
+            
             timeToGrapple = 0;
             target = null;
             DisableSprintJoint();
