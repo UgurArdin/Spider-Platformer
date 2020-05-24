@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class BossRunAnimation : StateMachineBehaviour
 {
+	public delegate void DestroySomeStuff();
+	public static event DestroySomeStuff DestroyBossBoxesInTheScene;
+	public delegate void DestroyWeb();
+	public static event DestroyWeb DestroyBossWebs;
 
 	public float speed;
 	public float meleeAttackRange;
@@ -12,8 +16,6 @@ public class BossRunAnimation : StateMachineBehaviour
 	Transform player;
 	Rigidbody2D rb;
 	Boss boss;
-	BossGrapple bossGrapple;
-
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
@@ -21,27 +23,17 @@ public class BossRunAnimation : StateMachineBehaviour
 		player = GameObject.FindGameObjectWithTag("Player").transform;
 		rb = animator.GetComponent<Rigidbody2D>();
 		boss = animator.GetComponent<Boss>();
-		bossGrapple = animator.GetComponentInChildren<BossGrapple>();
-		var boxes = FindObjectsOfType<BossBox>();
-		if (boxes != null)
+
+		if (DestroyBossWebs != null)
 		{
-			foreach (BossBox box in boxes)
-			{
-				Destroy(box.gameObject);
-			}
+			DestroyBossWebs();
 		}
-		var webs = GameObject.FindGameObjectsWithTag("BossGrappleWeb");
-		if (webs != null)
+		if (DestroyBossBoxesInTheScene != null)
 		{
-			foreach (GameObject web in webs)
-			{
-				Destroy(web);
-			}
+			DestroyBossBoxesInTheScene();
 		}
 
 	}
-
-	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
 		boss.LookAtPlayer();

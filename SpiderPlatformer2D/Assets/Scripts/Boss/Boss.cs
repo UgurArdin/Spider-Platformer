@@ -91,10 +91,10 @@ public class Boss : MonoBehaviour
             bossHealth -= 100;
             bossHealthSlider.value = bossHealth;
         }
-        if(bossHealth<=maxBossHealth/2)
-        {
-            this.gameObject.GetComponent<Animator>().SetBool("isEnrage", true);
-        }
+        //if(bossHealth<=maxBossHealth/2)
+        //{
+        //    this.gameObject.GetComponent<Animator>().SetBool("isEnrage", true);
+        //}
         else
         {
             //boss dead animation sounds etc.

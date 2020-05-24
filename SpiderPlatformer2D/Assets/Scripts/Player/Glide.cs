@@ -10,39 +10,21 @@ public class Glide : MonoBehaviour
     public float glideTime;
     public GameObject glideTrail;
     private Rigidbody2D rb;
-    
+
 
     private void Start()
     {
-
         rb = GetComponent<Rigidbody2D>();
         defaultGravity = rb.gravityScale;
-        
     }
-
 
     void Update()
     {
-        if (rb.velocity.y < -0.1f)
+        if (Input.GetKey(KeyCode.Space) && rb.velocity.y < -0.4f && glideGravity == false)
         {
-       
-            
-            if (Input.GetKey(KeyCode.Space)) 
-            {
-
-
-                if (glideGravity == false)
-                {
-                    glideGravity = true;
-                    glideTrail.SetActive(true);
-                    GetComponent<Rigidbody2D>().gravityScale = defaultGravity * glidingGravity;
-                }
-               
-            }
-           
-
-
-
+            glideGravity = true;
+            glideTrail.SetActive(true);
+            GetComponent<Rigidbody2D>().gravityScale = defaultGravity * glidingGravity;
         }
 
         if (Input.GetKeyUp(KeyCode.Space))
@@ -55,11 +37,9 @@ public class Glide : MonoBehaviour
             }
         }
 
-
-
     }
-        
-        }
+
+}
 
 
 

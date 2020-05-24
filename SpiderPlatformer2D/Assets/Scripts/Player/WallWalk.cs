@@ -7,15 +7,10 @@ public class WallWalk : MonoBehaviour
     Rigidbody2D rb;
     bool isGrounded;
     [SerializeField] LayerMask groundLayers;
-    
-
-    
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-       
-       
     }
 
     private void Update()

@@ -8,15 +8,11 @@ public class BossGrappleAnimation : StateMachineBehaviour
     Rigidbody2D rb;
     public float speed;
     Boss boss;
-
-    BossGrapple bossGrapple;
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         boss = animator.GetComponent<Boss>();
         rb = animator.GetComponent<Rigidbody2D>();
-        bossGrapple = animator.GetComponentInChildren<BossGrapple>();
     }
 
 

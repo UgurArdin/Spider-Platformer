@@ -35,10 +35,9 @@ public class PlayerController : MonoBehaviour
 
 
     //State
-    bool isAlive = true;
+    [SerializeField] public bool isAlive = true;
     bool isJumping;
     bool isFacingRight;
-    bool canJump;
     bool isGrounded;
 
     [Header("Wall Jump")]
@@ -51,10 +50,10 @@ public class PlayerController : MonoBehaviour
     RaycastHit2D WallCheckHit;
     float jumpTime;
     float mx = 0;
-    float jumpCounter = 0;
 
     void Start()
     {
+        Cursor.visible = true;
         grapple = GetComponentInChildren<Grapple>();
         rigidBody = GetComponent<Rigidbody2D>();
         gravityDefaultValue = rigidBody.gravityScale;
@@ -87,16 +86,9 @@ public class PlayerController : MonoBehaviour
                         rigidBody.gravityScale = 0;
                         if (distanceBetweenObjectAndPlayer > grappleRadious)
                         {
-                            GameObject particle = Instantiate(webSnapParticle, (transform.position + grapple.target.transform.position) / 2,
-                                Quaternion.identity);
-                            //var webBullet = GameObject.FindGameObjectsWithTag("GrappleWeb");
-                            //if (webBullet != null)
-                            //{
-                            //    foreach (GameObject web in webBullet)
-                            //    {
-                            //        Destroy(web.gameObject, 2);
-                            //    }
-                            //}
+                            GameObject particle = Instantiate(webSnapParticle, (transform.position + 
+                                grapple.target.transform.position) / 2,Quaternion.identity);
+
                             if(DestroyWebs!=null)
                             {
                                 DestroyWebs();
@@ -181,13 +173,11 @@ public class PlayerController : MonoBehaviour
             if (isFacingRight)
             {
                 WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(wallDistance, 0), wallDistance, groundMask);
-                //Debug.DrawRay(transform.position, new Vector2(wallDistance, 0), Color.black);
 
             }
             else
             {
                 WallCheckHit = Physics2D.Raycast(transform.position, new Vector2(-wallDistance, 0), wallDistance, groundMask);
-                //Debug.DrawRay(transform.position, new Vector2(-wallDistance, 0), Color.black);
 
             }
 
@@ -275,6 +265,7 @@ public class PlayerController : MonoBehaviour
             isAlive = false;
             animator.SetTrigger("Die");
             DeadMenu.SetActive(true);
+            rigidBody.constraints = RigidbodyConstraints2D.FreezePositionX;
         }
     }
     private void FlipSprite()

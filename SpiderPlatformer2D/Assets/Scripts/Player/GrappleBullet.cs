@@ -7,11 +7,6 @@ public class GrappleBullet : MonoBehaviour
     private Grapple grapple;
     [SerializeField] GameObject grappableObject;
     [SerializeField] GameObject webParticle;
-
-    private void Start()
-    {
-      
-    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Grappable"|| collision.gameObject.tag == "Pullable")
@@ -36,8 +31,6 @@ public class GrappleBullet : MonoBehaviour
 
         }
     }
-
-
     public void SetGrapple(Grapple grapple)
     {
         this.grapple = grapple;

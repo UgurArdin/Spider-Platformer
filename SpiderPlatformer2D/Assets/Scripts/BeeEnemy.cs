@@ -10,6 +10,7 @@ public class BeeEnemy : MonoBehaviour
     public float speed;
     public float nextWaypointDistance;
     public float maxChaseRange;
+    public float attackRate;
     [SerializeField] private GameObject beeAttackParticle;
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private Animator anim;
@@ -21,12 +22,15 @@ public class BeeEnemy : MonoBehaviour
     bool reachedEndOfPath= false;
     bool isChasing=false;
     bool isDead = false;
+    bool isAttackReady;
+    float attackRateValue;
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         InvokeRepeating("UpdatePath", 0f, 0.5f);
+
     }
     void UpdatePath()
     {
@@ -87,12 +91,7 @@ public class BeeEnemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Player"&& !isDead)
-        {
-            GameObject particle = Instantiate(beeAttackParticle,col.transform.position, Quaternion.identity);
-            Destroy(particle, 0.7f);
-            col.gameObject.GetComponent<PlayerController>().UpdateHealth(10);
-        }
+
         if (col.gameObject.tag == "WebBullet")
         {
             isDead = true;
@@ -101,4 +100,24 @@ public class BeeEnemy : MonoBehaviour
             
         }
     }
+    private void OnCollisionStay2D(Collision2D col)
+    {
+
+        if (col.gameObject.tag == "Player" && !isDead)
+        {
+            attackRateValue -= Time.deltaTime;
+            if (attackRateValue <= 0)
+            {
+                DamagePlayer(col);
+                attackRateValue = attackRate;
+            }
+        }
+    }
+    void DamagePlayer(Collision2D col)
+        {
+            GameObject particle = Instantiate(beeAttackParticle, col.transform.position, Quaternion.identity);
+            Destroy(particle, 0.7f);
+            col.gameObject.GetComponent<PlayerController>().UpdateHealth(10);
+        }
+
 }

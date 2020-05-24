@@ -197,8 +197,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   speed: 700
-  nextWaypointDistance: 2.5
+  nextWaypointDistance: 1.5
   maxChaseRange: 10
+  attackRate: 1
   beeAttackParticle: {fileID: 9130828677919000287, guid: 125fc255e9fde9542a9c84bb34f59c04,
     type: 3}
   sr: {fileID: 8024099619863398768}

@@ -13,7 +13,7 @@ public class GrappleWeb : MonoBehaviour
 
     public void DestroyMe()
     {
-        Destroy(this.gameObject);
+        Destroy(this.gameObject,2f);
     }
 
     private void OnDisable()

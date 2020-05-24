@@ -7,64 +7,47 @@ public class Web_Projectile : MonoBehaviour
     public float webRate;
     public float webDamage;
     public LayerMask whatToHit;
-
     public Transform webTrailPrefab;
-
-    float timeToWeb;
-    [SerializeField] Transform webPoint;
     public GameObject bulletPref;
+    public float bulletforce;
+    [SerializeField] Transform webPoint;
 
-    public float bulletforce = 20f;
+    PlayerController pc;
+
+    float webTimer;
     void Awake()
     {
         GetComponent<Rigidbody2D>();
-        if (webPoint == null)
-        {
-            Debug.LogError("hay amk");
-        }
+        pc=GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if (webRate == 0)
+        if (pc.isAlive)
         {
-            if (Input.GetButtonDown("Fire1"))
+            webTimer += Time.deltaTime;
+            if (Input.GetButtonDown("Fire1") && webTimer >= webRate)
             {
                 Shoot();
+                webTimer = 0;
             }
         }
-        else
-        {
-            if(Input.GetButton("Fire1") && Time.deltaTime > timeToWeb)
-            {
-                timeToWeb = Time.deltaTime + webRate;
-                Shoot();
-            }
-        }
+    }
     void Shoot()
-        {
-            Vector2 mousePos;
-            mousePos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
-            Vector2 webPointPos = new Vector2(webPoint.position.x, webPoint.position.y);
-            RaycastHit2D hit = Physics2D.Raycast(webPointPos, mousePos - webPointPos, 100, whatToHit);
-            
-            Debug.DrawLine(webPointPos, (mousePos - webPointPos) * 100, Color.cyan);
-            if(hit.collider!= null)
-            {
-                Debug.DrawLine(webPointPos, hit.point, Color.red);
-                //Debug.Log("FIÇIK" + hit.collider.name);
-            }
+    {
+        Vector2 mousePos;
+        mousePos = new Vector2(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+        Vector2 webPointPos = new Vector2(webPoint.position.x, webPoint.position.y);
+        RaycastHit2D hit = Physics2D.Raycast(webPointPos, mousePos - webPointPos, 100, whatToHit);
 
-            GameObject bullet = Instantiate(bulletPref, webPoint.position, webPoint.rotation);
-            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            rb.AddForce(webPoint.right * bulletforce, ForceMode2D.Impulse);
-        
-        
-        
-        }
+        Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        difference.Normalize();
+        float rot2 = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
 
-      
+
+        GameObject bullet = Instantiate(bulletPref, webPoint.position, Quaternion.Euler(0f, 0f, rot2));
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb.AddForce(new Vector2(difference.x, difference.y).normalized * bulletforce, ForceMode2D.Impulse);
     }
 }

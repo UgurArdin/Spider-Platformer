@@ -302,7 +302,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &606053529473341647
 Transform:
   m_ObjectHideFlags: 0
@@ -372,7 +372,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 606053529473343280}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 342144f799688034c831f8f2a0876946, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -443,18 +443,23 @@ MonoBehaviour:
   grappleRadious: 10
   maxGrappleForce: 3
   playerHealth: 0
+  groundCheckRadius: 0
+  bossGrappleForceMultiplier: 0
+  boss: {fileID: 0}
   gravityDefaultValue: 0
   animator: {fileID: 0}
   HealthBar: {fileID: 0}
   DeadMenu: {fileID: 0}
   webSnapParticle: {fileID: 9130828677919000287, guid: 125fc255e9fde9542a9c84bb34f59c04,
     type: 3}
+  groundCheck: {fileID: 0}
   groundMask:
     serializedVersion: 2
     m_Bits: 256
   wallJumpTime: 0.2
   wallSlideSpeed: 0.3
   wallDistance: 0.7
+  jumpDelay: 2
 --- !u!114 &606053527945390639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -760,6 +765,7 @@ MonoBehaviour:
   shootPoint: {fileID: 606053529924433541}
   lineRenderer: {fileID: 606053529924433536}
   springJoint: {fileID: 606053527945390633}
+  isGrappled: 0
   target: {fileID: 0}
 --- !u!120 &606053529924433536
 LineRenderer:
