@@ -8,7 +8,7 @@ public class BossCollider : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "GrappleBullet") 
+        if (col.tag == "GrappleBullet"|| col.tag == "Pullable") 
         boss.getDamage();
     }
 }

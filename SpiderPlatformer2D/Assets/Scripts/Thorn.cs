@@ -15,8 +15,11 @@ public class Thorn : MonoBehaviour
         }
         if (col.gameObject.tag == "Pullable")
         {
-            DamageParticles(col);
-            col.gameObject.GetComponent<BeeEnemy>().Die();
+            if (col.gameObject.GetComponent<BeeEnemy>() != null)
+            {
+                col.gameObject.GetComponent<BeeEnemy>().Die();
+                DamageParticles(col);
+            }
         }
     }
     void DamageParticles(Collision2D col)
