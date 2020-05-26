@@ -91,9 +91,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3294893597745841858}
   - component: {fileID: 3294893597745841857}
-  - component: {fileID: 3294893597745841885}
-  - component: {fileID: 4770184837880949740}
   - component: {fileID: 1956210037977326972}
+  - component: {fileID: 6108189129697073052}
   m_Layer: 8
   m_Name: PullableThorn
   m_TagString: Pullable
@@ -137,55 +136,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &3294893597745841885
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3294893597745841862}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.026162446, y: -0.010904223}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 19.08, y: 15.72}
-    newSize: {x: 1.2142857, y: 1.3428571}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.83059967, y: 0.95466083}
-  m_EdgeRadius: 0
---- !u!68 &4770184837880949740
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3294893597745841862}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: 0.62519294, y: -1.2972282}
-  - {x: 0.92981017, y: -0.6910534}
-  - {x: 0.7462616, y: 0.48593032}
-  - {x: -0.15994869, y: 1.1263742}
-  - {x: -1.3903974, y: -0.38557395}
-  - {x: -1.0147134, y: -1.3015363}
-  - {x: 0.6352655, y: -1.2914252}
 --- !u!114 &1956210037977326972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,3 +150,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageparticle: {fileID: 476274254373350136, guid: 3fb9486b7cc8dab438bdb264900e1987,
     type: 3}
+--- !u!70 &6108189129697073052
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3294893597745841862}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.18197541, y: -0.47992483}
+  m_Size: {x: 2.0884297, y: 1.9117532}
+  m_Direction: 1
