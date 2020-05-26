@@ -24,7 +24,8 @@ public class Thorn : MonoBehaviour
     }
     void DamageParticles(Collision2D col)
     {
-        GameObject particle = Instantiate(damageparticle, col.transform.position, Quaternion.identity);
+        ContactPoint2D contact = col.contacts[0];
+        GameObject particle = Instantiate(damageparticle,contact.point, Quaternion.identity);
         Destroy(particle, 0.7f);
     }
 }
