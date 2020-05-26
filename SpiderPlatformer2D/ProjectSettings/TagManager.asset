@@ -19,6 +19,7 @@ TagManager:
   - GrappleBossBullet
   - BossGrappleWeb
   - WaterDroplet
+  - InterObject
   layers:
   - Default
   - TransparentFX
