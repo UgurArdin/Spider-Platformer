@@ -94,11 +94,9 @@ public class BeeEnemy : MonoBehaviour
 
         if (col.gameObject.tag == "WebBullet")
         {
-            isDead = true;
-            anim.SetTrigger("Die");
-            Destroy(gameObject, 0.7f);
-            
+            Die();
         }
+
     }
     private void OnCollisionStay2D(Collision2D col)
     {
@@ -119,5 +117,12 @@ public class BeeEnemy : MonoBehaviour
             Destroy(particle, 0.7f);
             col.gameObject.GetComponent<PlayerController>().UpdateHealth(10);
         }
+
+    public void Die()
+    {
+        isDead = true;
+        anim.SetTrigger("Die");
+        Destroy(gameObject, 0.7f);
+    }
 
 }

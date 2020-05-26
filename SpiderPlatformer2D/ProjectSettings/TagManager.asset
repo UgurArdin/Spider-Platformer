@@ -18,6 +18,7 @@ TagManager:
   - GrabbleWeb
   - GrappleBossBullet
   - BossGrappleWeb
+  - WaterDroplet
   layers:
   - Default
   - TransparentFX

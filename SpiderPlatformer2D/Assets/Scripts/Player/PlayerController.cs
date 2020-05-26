@@ -148,6 +148,16 @@ public class PlayerController : MonoBehaviour
     {
         getIfGrounded();
     }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.tag == "WaterDroplet")
+        {
+            col.GetComponent<Animator>().SetTrigger("getTaken");
+            Destroy(col.gameObject, 2f);
+            UpdateHealth(-10);
+        }
+    }
     private  void InteractionWithBoss()
     {
         if (boss == null) return;
