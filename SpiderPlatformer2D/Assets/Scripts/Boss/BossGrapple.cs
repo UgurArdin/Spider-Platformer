@@ -11,6 +11,7 @@ public class BossGrapple : MonoBehaviour
     public LineRenderer lineRenderer;
     [HideInInspector] public bool isGrappled = false;
     [HideInInspector] public GameObject target;
+    Animator anim;
     GameObject playerObject;    
 
 
@@ -18,6 +19,7 @@ public class BossGrapple : MonoBehaviour
     {
         playerObject= GameObject.FindGameObjectWithTag("Player");
         lineRenderer.enabled = false;
+        anim = GetComponent<Animator>();
     }
     private void Update()
     {
@@ -25,11 +27,13 @@ public class BossGrapple : MonoBehaviour
         {
             if (target != null)
             {
+                anim.SetBool("isGrappled", true);
                 lineRenderer.SetPosition(0, shootPoint.position);
                 lineRenderer.SetPosition(1, target.transform.position);
             }
             else
             {
+                anim.SetBool("isGrappled", false);
                 lineRenderer.enabled = false;
             }
         }
@@ -46,6 +50,7 @@ public class BossGrapple : MonoBehaviour
             bulletInstance.GetComponent<Rigidbody2D>().AddForce(shootPoint.right * bulletSpeed);
             bulletInstance.GetComponent<BossGrappleBullet>().SetGrapple(this);
             Destroy(bulletInstance, 0.8f);//grappleRangeLimiter
+           
             isGrappled = true;
             StartCoroutine(DeactivateBossGrapple(2f));
         }
@@ -54,6 +59,7 @@ public class BossGrapple : MonoBehaviour
     IEnumerator DeactivateBossGrapple(float waitSecond)
     {
         yield return new WaitForSeconds(waitSecond);
+        anim.SetBool("isGrappled", false);
         target = null;
         BossGrappleBullet.bossHoldingPlayer = false;
         //yield return new WaitForSeconds(1f);        //yield return new WaitForSeconds(1f);

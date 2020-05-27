@@ -98,7 +98,7 @@ public class Boss : MonoBehaviour
         else
         {
             //boss dead animation sounds etc.
-            Debug.Log("boss is dead");
+            GetComponent<Animator>().SetTrigger("Die");
         }
     }
 

@@ -80,11 +80,11 @@ public class BeeEnemy : MonoBehaviour
             {
                 currentWaypoint++;
             }
-            if (force.x >= 0.01f)
+            if (rb.velocity.x >= 0.01f)
             {
                 transform.localScale = new Vector3(1,1,1);
             }
-            else if (force.x <= 0.01f)
+            else if (rb.velocity.x <= 0.01f)
             {
                 transform.localScale = new Vector3(-1,1,1);
             }
@@ -116,7 +116,6 @@ public class BeeEnemy : MonoBehaviour
     }
     void DamagePlayer(Collision2D col)
         {
-        Debug.Log("Attack");
         anim.SetTrigger("Attack");
         GameObject particle = Instantiate(beeAttackParticle, col.transform.position, Quaternion.identity);
             Destroy(particle, 0.7f);
