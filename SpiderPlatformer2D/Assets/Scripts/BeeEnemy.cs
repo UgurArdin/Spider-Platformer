@@ -6,13 +6,13 @@ using Pathfinding;
 public class BeeEnemy : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Transform target;
+    private Transform target;
     public float speed;
     public float nextWaypointDistance;
     public float maxChaseRange;
     public float attackRate;
     [SerializeField] private GameObject beeAttackParticle;
-    [SerializeField] private SpriteRenderer sr;
+    [SerializeField] private Transform parentTransform;
     [SerializeField] private Animator anim;
 
     Path path;
@@ -24,12 +24,14 @@ public class BeeEnemy : MonoBehaviour
     bool isDead = false;
     bool isAttackReady;
     float attackRateValue;
+    float xScaleValue;
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         InvokeRepeating("UpdatePath", 0f, 0.5f);
+        //xScaleValue = transform.localScale.x;
 
     }
     void UpdatePath()
@@ -53,7 +55,7 @@ public class BeeEnemy : MonoBehaviour
         {
             isChasing = true;
         }
-        if (isChasing&& !isDead) 
+        if (isChasing && !isDead)
         {
             if (path == null)
             {
@@ -69,6 +71,7 @@ public class BeeEnemy : MonoBehaviour
                 reachedEndOfPath = false;
             }
             Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
+
             Vector2 force = direction * speed * Time.deltaTime;
             rb.AddForce(force);
             float distanceBetweenWaypoints = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
@@ -77,15 +80,15 @@ public class BeeEnemy : MonoBehaviour
             {
                 currentWaypoint++;
             }
-
             if (force.x >= 0.01f)
             {
-                sr.flipX = true;
+                transform.localScale = new Vector3(1,1,1);
             }
             else if (force.x <= 0.01f)
             {
-                sr.flipX = false;
+                transform.localScale = new Vector3(-1,1,1);
             }
+      
         }
     }
 
@@ -113,7 +116,9 @@ public class BeeEnemy : MonoBehaviour
     }
     void DamagePlayer(Collision2D col)
         {
-            GameObject particle = Instantiate(beeAttackParticle, col.transform.position, Quaternion.identity);
+        Debug.Log("Attack");
+        anim.SetTrigger("Attack");
+        GameObject particle = Instantiate(beeAttackParticle, col.transform.position, Quaternion.identity);
             Destroy(particle, 0.7f);
             col.gameObject.GetComponent<PlayerController>().UpdateHealth(10);
         }
@@ -122,7 +127,8 @@ public class BeeEnemy : MonoBehaviour
     {
         isDead = true;
         anim.SetTrigger("Die");
-        Destroy(gameObject, 0.7f);
+        Destroy(gameObject, 1.1f);
+        rb.gravityScale = 2;
     }
 
 }
