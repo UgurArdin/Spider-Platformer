@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OmbieDialogue : MonoBehaviour
+public interface INPC
 {
-
+    int playersCame { get; set; }
 }
