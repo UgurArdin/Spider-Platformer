@@ -257,7 +257,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 8461efb6cf31afb44811b5f3d93a7b51, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -294,7 +294,7 @@ Transform:
   m_GameObject: {fileID: 6675907394315727545}
   m_LocalRotation: {x: -0.00052356074, y: 0, z: 0, w: 0.9999999}
   m_LocalPosition: {x: 126.38443, y: -24.114567, z: 0}
-  m_LocalScale: {x: 0.9419792, y: 0.9419794, z: 0.9419794}
+  m_LocalScale: {x: 0.9419792, y: 0.94197947, z: 0.94197947}
   m_Children:
   - {fileID: 6675907394598012169}
   m_Father: {fileID: 0}
@@ -398,7 +398,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 59.38898
+  m_Mass: 59.388985
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 4
@@ -422,16 +422,20 @@ MonoBehaviour:
   player: {fileID: 0}
   grappling: 0
   isFlipped: 0
+  wallAnim: {fileID: 0}
   bossHealthSlider: {fileID: 0}
-  bossHealth: 1000
+  bossHealth: 100
   attackDamage: 20
   enragedAttackDamage: 40
-  bossAttackParticle: {fileID: 0}
+  bossAttackParticle: {fileID: 476274254373350136, guid: b74125dfe5a03324fafd5b944fa30f42,
+    type: 3}
   attackOffset: {x: -5.29, y: -0.58, z: 0}
   attackRange: 6.52
   attackMask:
     serializedVersion: 2
     m_Bits: 2048
+  defaultCamera: {fileID: 0}
+  bossCamera: {fileID: 0}
 --- !u!114 &6675907394598012181
 MonoBehaviour:
   m_ObjectHideFlags: 0

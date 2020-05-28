@@ -10,7 +10,7 @@ public class BossRunAnimation : StateMachineBehaviour
 	public delegate void DestroyWeb();
 	public static event DestroyWeb DestroyBossWebs;
 
-	public float speed;
+	public static float speed=8;
 	public float meleeAttackRange;
 	public float grappleRange;
 	Transform player;
