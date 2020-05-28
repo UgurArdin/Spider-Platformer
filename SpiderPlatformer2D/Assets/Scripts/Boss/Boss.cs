@@ -10,7 +10,7 @@ public class Boss : MonoBehaviour
     [HideInInspector]public bool grappling;
     [HideInInspector] public bool isFlipped = false;
     bool isInVulnearable = false;
-
+    [SerializeField] Animator wallAnim;
     public Slider bossHealthSlider;
     public float bossHealth;
     public int attackDamage = 20;
@@ -100,6 +100,7 @@ public class Boss : MonoBehaviour
         {
             //boss dead animation sounds etc.
             GetComponent<Animator>().SetTrigger("Die");
+            wallAnim.SetBool("isClosed", false);
         }
     }
 

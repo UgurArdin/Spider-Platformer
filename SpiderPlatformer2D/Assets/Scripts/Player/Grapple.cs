@@ -125,4 +125,10 @@ public class Grapple : MonoBehaviour
     {
         springJoint.enabled = false;
     }
+    public void ReleaseGrapple()
+    {
+        DisableSprintJoint();
+        target = null;
+        isGrappled = false;
+    }
 }
