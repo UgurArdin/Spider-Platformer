@@ -22,6 +22,7 @@ public class BeeEnemy : MonoBehaviour
     bool reachedEndOfPath= false;
     bool isChasing=false;
     bool isDead = false;
+    bool canAttackDirectly=true;
     bool isAttackReady;
     float attackRateValue;
     float xScaleValue;
@@ -31,7 +32,8 @@ public class BeeEnemy : MonoBehaviour
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
         InvokeRepeating("UpdatePath", 0f, 0.5f);
-        //xScaleValue = transform.localScale.x;
+        xScaleValue = transform.localScale.x;
+        attackRateValue = attackRate;
 
     }
     void UpdatePath()
@@ -71,7 +73,7 @@ public class BeeEnemy : MonoBehaviour
                 reachedEndOfPath = false;
             }
             Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-
+            Vector2 directionOfPlayer = ((Vector2)target.transform.position- rb.position).normalized;
             Vector2 force = direction * speed * Time.deltaTime;
             rb.AddForce(force);
             float distanceBetweenWaypoints = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
@@ -80,21 +82,30 @@ public class BeeEnemy : MonoBehaviour
             {
                 currentWaypoint++;
             }
-            if (rb.velocity.x >= 0.1f)
+            if (rb.velocity.magnitude > 0.2)
             {
-                transform.localScale = new Vector3(1,1,1);
+                if (Mathf.Sign(directionOfPlayer.x) > 0)
+                {
+                    transform.localScale = new Vector3(xScaleValue, transform.localScale.y, 1);
+                }
+                else if (Mathf.Sign(directionOfPlayer.x) < 0)
+                {
+                    transform.localScale = new Vector3(-xScaleValue, transform.localScale.y, 1);
+                }
             }
-            else if (rb.velocity.x <= 0.1f)
-            {
-                transform.localScale = new Vector3(-1,1,1);
-            }
-      
+
         }
     }
 
     private void OnCollisionEnter2D(Collision2D col)
     {
+        if (col.gameObject.tag == "Player" && !isDead&& canAttackDirectly)
+        {
+                DamagePlayer(col);
+            canAttackDirectly = false;
 
+
+        }
         if (col.gameObject.tag == "WebBullet")
         {
             Die();
@@ -113,6 +124,16 @@ public class BeeEnemy : MonoBehaviour
                 attackRateValue = attackRate;
             }
         }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        StartCoroutine(AttackExitDelay(0.5f));
+    }
+
+    IEnumerator AttackExitDelay(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        canAttackDirectly = true;
     }
     void DamagePlayer(Collision2D col)
         {

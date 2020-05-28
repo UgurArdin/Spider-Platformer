@@ -110,9 +110,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6407807901188695629}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 25.431349, y: -25.229168, z: 4.1961684}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.52077, y: 0.52077, z: 1}
   m_Children:
   - {fileID: 6407807903065427271}
   - {fileID: 3136974639680230664}
@@ -203,9 +203,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e4786efa85d0644b7493d991f6336e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 700
+  speed: 1000
   nextWaypointDistance: 1.5
-  maxChaseRange: 10
+  maxChaseRange: 12
   attackRate: 1
   beeAttackParticle: {fileID: 9130828677919000287, guid: 125fc255e9fde9542a9c84bb34f59c04,
     type: 3}

@@ -9,9 +9,10 @@ public class PlayerController : MonoBehaviour
     //Config
     [SerializeField] float runSpeed;
     [SerializeField] float jumpSpeed ;
+    [SerializeField] float pullingForceMultiplier;
     [SerializeField] float grappleForceMultiplier;
-    [SerializeField] float grappleRadious;
     [SerializeField] float maxGrappleForce;
+    [SerializeField] float grappleRadious;
     [SerializeField] float playerHealth;
     [SerializeField] float groundCheckRadius;
     [SerializeField] float bossGrappleForceMultiplier;
@@ -81,7 +82,7 @@ public class PlayerController : MonoBehaviour
                         Vector3 direction = targetInstance.transform.position - transform.position;
                         direction.x = Mathf.Clamp(direction.x, -maxGrappleForce, maxGrappleForce);
                         direction.y = Mathf.Clamp(direction.y, -maxGrappleForce, maxGrappleForce);
-                        rigidBody.AddForce(direction * grappleForceMultiplier);
+                        rigidBody.AddForce(direction * grappleForceMultiplier * Time.deltaTime);
 
                         rigidBody.gravityScale = 0;
                         if (distanceBetweenObjectAndPlayer > grappleRadious)
@@ -120,7 +121,7 @@ public class PlayerController : MonoBehaviour
                     if (distanceBetweenObjectAndPlayer >= 2f)
                     {
                         Vector3 direction = targetInstance.transform.position - transform.position;
-                        targetInstance.GetComponent<Rigidbody2D>().AddForce(-direction * 5);
+                        targetInstance.GetComponent<Rigidbody2D>().AddForce(-direction * pullingForceMultiplier * Time.deltaTime);
                         if (distanceBetweenObjectAndPlayer > grappleRadious)
                         {
                             GameObject particle = Instantiate(webSnapParticle, (transform.position + grapple.target.transform.position) / 2,
@@ -157,6 +158,10 @@ public class PlayerController : MonoBehaviour
             Destroy(col.gameObject, 2f);
             UpdateHealth(-10);
         }
+        if (col.tag == "Wormling")
+        {
+
+        }
     }
     private  void InteractionWithBoss()
     {
@@ -164,7 +169,7 @@ public class PlayerController : MonoBehaviour
         Vector3 direction = boss.BossPos() - transform.position;
         if(BossGrappleBullet.bossHoldingPlayer)
         {
-            rigidBody.AddForce(direction*bossGrappleForceMultiplier);
+            rigidBody.AddForce(direction*bossGrappleForceMultiplier*Time.deltaTime);
         }
     }
 

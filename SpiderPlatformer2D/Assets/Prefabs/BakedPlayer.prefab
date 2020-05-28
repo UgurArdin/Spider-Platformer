@@ -261,7 +261,7 @@ SpringJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: -0.06, y: 0.15}
-  m_ConnectedAnchor: {x: 90.04, y: -24.65}
+  m_ConnectedAnchor: {x: 47.239998, y: -24.65}
   m_AutoConfigureDistance: 0
   m_Distance: 0.005
   m_DampingRatio: 0
@@ -280,12 +280,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runSpeed: 9
   jumpSpeed: 14
-  grappleForceMultiplier: 5
-  grappleRadious: 11
-  maxGrappleForce: 5
+  pullingForceMultiplier: 500
+  grappleForceMultiplier: 150
+  maxGrappleForce: 650
+  grappleRadious: 12
   playerHealth: 100
   groundCheckRadius: 0.3
-  bossGrappleForceMultiplier: 100
+  bossGrappleForceMultiplier: 2000
   boss: {fileID: 0}
   gravityDefaultValue: 0
   animator: {fileID: 5076707036320550717}

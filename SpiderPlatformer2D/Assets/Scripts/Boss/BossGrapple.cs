@@ -61,6 +61,7 @@ public class BossGrapple : MonoBehaviour
         yield return new WaitForSeconds(waitSecond);
         anim.SetBool("isGrappled", false);
         target = null;
+        lineRenderer.enabled = false;
         BossGrappleBullet.bossHoldingPlayer = false;
         //yield return new WaitForSeconds(1f);        //yield return new WaitForSeconds(1f);
         isGrappled = false;

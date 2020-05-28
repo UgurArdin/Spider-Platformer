@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 875806515662565832}
   m_LocalRotation: {x: 0.00052356074, y: -1.5603326e-11, z: 0.000000029802319, w: 0.9999999}
-  m_LocalPosition: {x: -6.11, y: -0.22, z: 0}
+  m_LocalPosition: {x: -5.67, y: 0.75, z: 0}
   m_LocalScale: {x: 0.61041695, y: 0.34501812, z: 4.2463765}
   m_Children: []
   m_Father: {fileID: 6675907394598012169}
@@ -118,9 +118,9 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1388376769
-  m_SortingLayer: 1
-  m_SortingOrder: 20
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: -1
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
@@ -132,7 +132,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -141,7 +141,7 @@ LineRenderer:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0.48408926
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -153,8 +153,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0, g: 1, b: 0.030314207, a: 1}
+      key1: {r: 0, g: 0.509434, b: 0.06134773, a: 1}
       key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 1, g: 1, b: 1, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -292,14 +292,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6675907394315727545}
-  m_LocalRotation: {x: -0.00052356074, y: -0, z: -0, w: 0.9999999}
+  m_LocalRotation: {x: -0.00052356074, y: 0, z: 0, w: 0.9999999}
   m_LocalPosition: {x: 126.38443, y: -24.114567, z: 0}
   m_LocalScale: {x: 0.9419792, y: 0.9419794, z: 0.9419794}
   m_Children:
   - {fileID: 6675907394598012169}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.060000002, y: 0, z: 0}
 --- !u!1 &6675907394467403578
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,7 +398,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 52.923424
+  m_Mass: 59.38898
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 4
@@ -426,6 +426,7 @@ MonoBehaviour:
   bossHealth: 1000
   attackDamage: 20
   enragedAttackDamage: 40
+  bossAttackParticle: {fileID: 0}
   attackOffset: {x: -5.29, y: -0.58, z: 0}
   attackRange: 6.52
   attackMask:
@@ -481,7 +482,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -3.794294, y: 0.04734707}
+  m_Offset: {x: -3.794294, y: -0.2567073}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -492,7 +493,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.011482, y: 3.2732944}
+  m_Size: {x: 4.011482, y: 5.0897245}
   m_EdgeRadius: 0
 --- !u!1 &6675907394964905485
 GameObject:
@@ -539,7 +540,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.31731534, y: 2.5395894}
+  m_Offset: {x: 2.3851337, y: 3.7346182}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -550,7 +551,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.7616177, y: 1.3828526}
+  m_Size: {x: 4.3130035, y: 2.0722978}
   m_EdgeRadius: 0
 --- !u!114 &6675907394964905487
 MonoBehaviour:

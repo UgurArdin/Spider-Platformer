@@ -16,7 +16,7 @@ public class Boss : MonoBehaviour
     public int attackDamage = 20;
     public int enragedAttackDamage = 40;
     private float maxBossHealth;
-
+    public GameObject bossAttackParticle;
     public Vector3 attackOffset;
     public float attackRange = 1f;
     public LayerMask attackMask;
@@ -36,6 +36,7 @@ public class Boss : MonoBehaviour
         Collider2D colInfo = Physics2D.OverlapCircle(pos, attackRange, attackMask);
         if (colInfo != null)
         {
+            GameObject bulletInstance = Instantiate(bossAttackParticle, player.transform.position, Quaternion.identity);
             colInfo.GetComponent<PlayerController>().UpdateHealth(attackDamage);
         }
     }

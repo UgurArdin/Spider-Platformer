@@ -20,6 +20,7 @@ TagManager:
   - BossGrappleWeb
   - WaterDroplet
   - InterObject
+  - Wormling
   layers:
   - Default
   - TransparentFX
