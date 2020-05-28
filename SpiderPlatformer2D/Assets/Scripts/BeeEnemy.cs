@@ -80,11 +80,11 @@ public class BeeEnemy : MonoBehaviour
             {
                 currentWaypoint++;
             }
-            if (rb.velocity.x >= 0.01f)
+            if (rb.velocity.x >= 0.1f)
             {
                 transform.localScale = new Vector3(1,1,1);
             }
-            else if (rb.velocity.x <= 0.01f)
+            else if (rb.velocity.x <= 0.1f)
             {
                 transform.localScale = new Vector3(-1,1,1);
             }
