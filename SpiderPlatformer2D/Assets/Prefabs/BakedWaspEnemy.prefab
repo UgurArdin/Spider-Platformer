@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3136974639680230664}
   - component: {fileID: 3136974639680230667}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: image_0000
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 3136974639713257020}
   - component: {fileID: 3136974639713257021}
   - component: {fileID: 3136974639713257023}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: BakedWaspEnemy
   m_TagString: Pullable
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6407807903065427271}
   - component: {fileID: 6407807903065427268}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: PlayerLight (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

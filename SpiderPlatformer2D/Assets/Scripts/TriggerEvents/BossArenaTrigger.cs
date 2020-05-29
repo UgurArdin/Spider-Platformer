@@ -13,11 +13,14 @@ public class BossArenaTrigger : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        wallAnim.SetBool("isClosed", true);
-        bossSpider.SetActive(true);
-        bossHealthUI.SetActive(true);
-        defaultCamera.SetActive(false);
-        bossCamera.SetActive(true);
-        gameObject.SetActive(false);
+        if(collision.tag=="Player")
+        {
+            wallAnim.SetBool("isClosed", true);
+            bossSpider.SetActive(true);
+            bossHealthUI.SetActive(true);
+            defaultCamera.SetActive(false);
+            bossCamera.SetActive(true);
+            gameObject.SetActive(false);
+        }
     }
 }

@@ -65,6 +65,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isAlive)
         {
+            getIfGrounded();
             InteractionWithBoss();
             Run();
             Jump();
@@ -145,10 +146,10 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-    private void FixedUpdate()
-    {
-        getIfGrounded();
-    }
+    //private void FixedUpdate()
+    //{
+
+    //}
 
     private void OnTriggerEnter2D(Collider2D col)
     {
@@ -268,6 +269,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             animator.SetBool("isFalling", false);
+            Debug.Log("Merhaba");
         }
     }
     public void UpdateHealth(int damage)

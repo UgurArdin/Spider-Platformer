@@ -79,7 +79,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef49b06ac18f4b4b8feea83e9cd9cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
   meleeAttackRange: 7
   grappleRange: 15
 --- !u!114 &-4278441228623378344
