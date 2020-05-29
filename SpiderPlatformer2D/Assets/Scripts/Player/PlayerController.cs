@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     bool isJumping;
     bool isFacingRight;
     bool isGrounded;
+    bool isPoisoned;
 
     [Header("Wall Jump")]
     public LayerMask groundMask;
@@ -51,13 +52,16 @@ public class PlayerController : MonoBehaviour
     RaycastHit2D WallCheckHit;
     float jumpTime;
     float mx = 0;
-
+    float runSpeedValue;
+    float jumpSpeedValue;
     void Start()
     {
         Cursor.visible = true;
         grapple = GetComponentInChildren<Grapple>();
         rigidBody = GetComponent<Rigidbody2D>();
         gravityDefaultValue = rigidBody.gravityScale;
+        jumpSpeedValue= jumpSpeed;
+        runSpeedValue = runSpeed;
     }
 
 
@@ -159,10 +163,6 @@ public class PlayerController : MonoBehaviour
             Destroy(col.gameObject, 2f);
             UpdateHealth(-10);
         }
-        if (col.tag == "Wormling")
-        {
-
-        }
     }
     private  void InteractionWithBoss()
     {
@@ -242,7 +242,7 @@ public class PlayerController : MonoBehaviour
     }
     private void getIfGrounded() 
     {
-        isGrounded=Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, LayerMask.GetMask("Ground"));//aq ugur
+        isGrounded=Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundMask);//ağla ugur
         animator.SetBool("isJumping", false);
         isJumping = false;
 
@@ -269,7 +269,6 @@ public class PlayerController : MonoBehaviour
         else
         {
             animator.SetBool("isFalling", false);
-            Debug.Log("Merhaba");
         }
     }
     public void UpdateHealth(int damage)
@@ -284,6 +283,23 @@ public class PlayerController : MonoBehaviour
             DeadMenu.SetActive(true);
             rigidBody.constraints = RigidbodyConstraints2D.FreezePositionX;
         }
+    }
+
+    public void GetPoisoned()
+    {
+        StartCoroutine(PoisonedFor(2f));
+    }
+
+    IEnumerator PoisonedFor(float time)
+    {
+        runSpeed = runSpeedValue - 3; ;
+        jumpSpeed =jumpSpeedValue- 5;
+        GetComponentInChildren<SpriteRenderer>().color = Color.yellow;
+        yield return new WaitForSeconds(time);
+        GetComponentInChildren<SpriteRenderer>().color = Color.white;
+        runSpeed = runSpeedValue;
+        jumpSpeed = jumpSpeedValue;
+
     }
     private void FlipSprite()
     {

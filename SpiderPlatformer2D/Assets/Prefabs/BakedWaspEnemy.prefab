@@ -207,7 +207,7 @@ MonoBehaviour:
   nextWaypointDistance: 1.5
   maxChaseRange: 12
   attackRate: 1
-  beeAttackParticle: {fileID: 9130828677919000287, guid: 125fc255e9fde9542a9c84bb34f59c04,
+  beeAttackParticle: {fileID: 9130828677919000287, guid: 68b610d7c433c04468313fd4ae9a5098,
     type: 3}
   parentTransform: {fileID: 6407807901188695626}
   anim: {fileID: 6407807901188695627}

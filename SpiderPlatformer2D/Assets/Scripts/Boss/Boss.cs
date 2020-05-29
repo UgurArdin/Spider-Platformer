@@ -13,7 +13,7 @@ public class Boss : MonoBehaviour
     [SerializeField] Animator wallAnim;
     public Slider bossHealthSlider;
     public float bossHealth;
-    public int attackDamage = 20;
+    public int attackDamage;
     public int enragedAttackDamage = 40;
     private float maxBossHealth;
     public GameObject bossAttackParticle;
