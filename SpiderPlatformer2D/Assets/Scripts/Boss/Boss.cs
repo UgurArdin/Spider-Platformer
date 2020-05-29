@@ -110,6 +110,7 @@ public class Boss : MonoBehaviour
             GetComponent<BoxCollider2D>().enabled = false;
             GetComponent<CircleCollider2D>().enabled = false;
             GetComponent<Rigidbody2D>().isKinematic = true;
+            bossHealthSlider.gameObject.SetActive(false);
         }
     }
 

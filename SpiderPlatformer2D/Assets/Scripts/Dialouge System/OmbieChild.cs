@@ -15,9 +15,9 @@ public class OmbieChild : MonoBehaviour
         if (collision.gameObject.tag == "InterObject")
         {
             isTouched = true;
-            Debug.Log("Working");
             Ombie.childCount++;
-            
+            Debug.Log("Working, number of child returned="+ Ombie.childCount);
+
             interactCol.enabled = false;
             StartCoroutine(StopRigidBodyAfter(3f));
             if (Ombie.childCount == 2)

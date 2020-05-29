@@ -19575,7 +19575,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &636472159
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20633,7 +20633,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -21192,18 +21192,19 @@ MonoBehaviour:
     name: Ombie
     sentences:
     - Hi little spidey, my name is Ombie.
-    - I lost my child.Can u please bring them to me ? A bitch spider took them from
-      me . I hope you are not bitch like him.
-    - I will give you grapple skill to help you . Thanks!
+    - I lost my child.Can u please bring them to me ? An evil spider took them from
+      me . Please help me :(
+    - I will give you my best silk rope you can add it to your web to use it as an
+      grapple skill, it will help you in your adventure . Thanks!
   dialogueIdle:
     name: Ombie
     sentences:
-    - It seems you didn't bring my childs yet you stupid . Go and get them or you
-      can't complete the game.
+    - 'Please... Hurry. I'' m very worried '
   completeDialogue:
     name: Ombie
     sentences:
-    - Thanks for bringing my childs to me . Sorry for bad words motherfucker.
+    - Thanks for bringing my children back to me . You are not like the other spiders.
+      I'm very gratefull for everything. Good Luck on your journey.
 --- !u!70 &731386193
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -31511,6 +31512,7 @@ MonoBehaviour:
   bossSpider: {fileID: 1111714109}
   defaultCamera: {fileID: 837608447}
   bossCamera: {fileID: 2142061883}
+  bossHealthUI: {fileID: 636472158}
 --- !u!61 &1329333888
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -31524,7 +31526,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.040348053, y: 0.88763046}
+  m_Offset: {x: 4.4095726, y: 0.8876295}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -31535,7 +31537,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.178749, y: 6.8099747}
+  m_Size: {x: 3.156868, y: 5.2874393}
   m_EdgeRadius: 0
 --- !u!4 &1329333889
 Transform:
@@ -44363,6 +44365,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BakedSpiderBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675907394315727545, guid: b4356aea3f174314ba934128fdd6afb7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6675907394315727546, guid: b4356aea3f174314ba934128fdd6afb7,
         type: 3}
