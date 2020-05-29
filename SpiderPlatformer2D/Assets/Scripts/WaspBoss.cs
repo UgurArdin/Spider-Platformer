@@ -18,7 +18,11 @@ public class WaspBoss : MonoBehaviour
     public Slider bossHealthSlider;
     public float bossHealth;
     [SerializeField] private Transform parentTransform;
+    [SerializeField] private Transform[] spawnBehaviourTransform;
+    [SerializeField] GameObject myChild;
+    bool behaviourFinished;
     [SerializeField] private Animator anim;
+    [SerializeField] private int spawnChildCount = 3;
     public GameObject bossAttackParticle;
     public Vector3 attackOffset;
     public float attackRange = 1f;
@@ -32,6 +36,8 @@ public class WaspBoss : MonoBehaviour
     bool reachedEndOfPath= false;
     bool isChasing=false;
     bool isDead = false;
+    bool isSpawned;
+    bool isSpawning;
     bool canAttackDirectly=true;
     bool isAttackReady;
     bool isCharging;
@@ -50,6 +56,9 @@ public class WaspBoss : MonoBehaviour
         attackRateValue = attackRate;
         maxBossHealth = bossHealth;
         bossHealthSlider.maxValue = bossHealth;
+        chargeSpeed *= 100;
+        speed *= 100;
+        spawnChildCount = spawnBehaviourTransform.Length;
 
     }
     void UpdatePath()
@@ -76,61 +85,90 @@ public class WaspBoss : MonoBehaviour
     }
     void FixedUpdate()
     {
-        float distance = Vector3.Distance(target.position, transform.position);
-        if (distance < maxChaseRange && !isDead)
+        if (!isSpawned && isSpawning)
         {
-            isChasing = true;
-            if (canCharge)
+            var newPos = Vector2.MoveTowards((Vector2)rb.position, spawnBehaviourTransform[0].position, Time.fixedDeltaTime * speed / 1000);
+            rb.MovePosition(newPos);
+            float distance = Vector2.Distance(transform.position, spawnBehaviourTransform[0].position);
+            if (distance <= 1f)
             {
-                isCharging = true;
-                canCharge = false;
-                chargeWaitTime = Random.Range(5, 12);
-                anim.SetBool("Charge", true);
-            }
-            else
-            {
-                anim.SetBool("Charge", false);
-            }
 
+                StartCoroutine(SpawnBehaviour(1f));
+                isSpawned = true;
+            }
         }
-        if (isChasing && !isDead&& !isCharging)
+
+
+        else
         {
-            if (path == null)
+            float distance = Vector3.Distance(target.position, transform.position);
+            if (distance < maxChaseRange && !isDead)
             {
-                return;
-            }
-            if (currentWaypoint >= path.vectorPath.Count)
-            {
-                reachedEndOfPath = true;
-                return;
-            }
-            else
-            {
-                reachedEndOfPath = false;
-            }
-            Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-            Vector2 directionOfPlayer = ((Vector2)target.transform.position- rb.position).normalized;
-            Vector2 force = direction * speed * Time.deltaTime;
-            rb.AddForce(force);
-            float distanceBetweenWaypoints = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
-
-            if (distanceBetweenWaypoints < nextWaypointDistance)
-            {
-                currentWaypoint++;
-            }
-            if (rb.velocity.magnitude > 0.2)
-            {
-                if (directionOfPlayer.x> 0.2f)
+                isChasing = true;
+                if (canCharge)
                 {
-                    transform.localScale = new Vector3(xScaleValue, transform.localScale.y, 1);
+                    isCharging = true;
+                    canCharge = false;
+                    chargeWaitTime = Random.Range(5, 12);
+                    anim.SetBool("Charge", true);
                 }
-                else if (directionOfPlayer.x < 0.2f)
+                else
                 {
-                    transform.localScale = new Vector3(-xScaleValue, transform.localScale.y, 1);
+                    anim.SetBool("Charge", false);
                 }
-            }
 
+            }
+            if (isChasing && !isDead && !isCharging)
+            {
+                if (path == null)
+                {
+                    return;
+                }
+                if (currentWaypoint >= path.vectorPath.Count)
+                {
+                    reachedEndOfPath = true;
+                    return;
+                }
+                else
+                {
+                    reachedEndOfPath = false;
+                }
+                Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
+                Vector2 directionOfPlayer = ((Vector2)target.transform.position - rb.position).normalized;
+                Vector2 force = direction * speed * Time.deltaTime;
+                rb.AddForce(force);
+                float distanceBetweenWaypoints = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
+
+                if (distanceBetweenWaypoints < nextWaypointDistance)
+                {
+                    currentWaypoint++;
+                }
+                if (rb.velocity.magnitude > 0.2)
+                {
+                    if (directionOfPlayer.x > 0.2f)
+                    {
+                        transform.localScale = new Vector3(xScaleValue, transform.localScale.y, 1);
+                    }
+                    else if (directionOfPlayer.x < 0.2f)
+                    {
+                        transform.localScale = new Vector3(-xScaleValue, transform.localScale.y, 1);
+                    }
+                }
+
+            }
         }
+
+    }
+    IEnumerator SpawnBehaviour(float time)
+    {
+        for (int i = 0; i < spawnChildCount; i++)
+        {
+            var child = Instantiate(myChild, spawnBehaviourTransform[Random.Range(0, spawnBehaviourTransform.Length)].position, Quaternion.identity);
+            child.GetComponent<BeeEnemy>().maxChaseRange = float.MaxValue;
+            yield return new WaitForSeconds(time);
+        }
+        //behaviourFinished = true;
+
     }
     public void ChargeForce()//animation event de çağırlıyor
     {
@@ -179,15 +217,15 @@ public class WaspBoss : MonoBehaviour
     public void getDamage(float damage)
     {
         if (isDead || isInVulnearable || bossHealth < 0) { return; }
+        if (bossHealth <= maxBossHealth / 2 &&!isSpawning&&!isSpawned)
+        {
+            isSpawning = true;
+        }
         if (bossHealth > 0)
         {
             bossHealth -= damage;
             bossHealthSlider.value = bossHealth;
         }
-        //if(bossHealth<=maxBossHealth/2)
-        //{
-        //    this.gameObject.GetComponent<Animator>().SetBool("isEnrage", true);
-        //}
         else
         {
             //boss dead animation sounds etc.

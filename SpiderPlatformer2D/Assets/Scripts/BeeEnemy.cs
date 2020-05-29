@@ -106,7 +106,7 @@ public class BeeEnemy : MonoBehaviour
 
 
         }
-        if (col.gameObject.tag == "WebBullet")
+        if (col.gameObject.tag == "WebBullet" &&!isDead)
         {
             Die();
         }
