@@ -21,6 +21,7 @@ public class AudioManager : MonoBehaviour
             s.source.priority = s.priority;
             s.source.loop = s.loop;
         }
+        Play("guitar");
     }
 
     public void Play(string name)

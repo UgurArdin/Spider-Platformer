@@ -101,7 +101,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_Interpolate: 2
   m_SleepingMode: 1
@@ -166,7 +166,7 @@ TrailRenderer:
   m_Time: 0.05
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1.2
+    widthMultiplier: 1.5
     widthCurve:
       serializedVersion: 2
       m_Curve:

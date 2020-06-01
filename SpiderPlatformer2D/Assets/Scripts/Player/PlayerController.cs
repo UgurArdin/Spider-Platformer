@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     //Config
     [SerializeField] float runSpeed;
     [SerializeField] float jumpSpeed ;
+    [SerializeField] float timeBetweenStep;
     [SerializeField] float pullingForceMultiplier;
     [SerializeField] float grappleForceMultiplier;
     [SerializeField] float maxGrappleForce;
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float playerHealth;
     [SerializeField] float groundCheckRadius;
     [SerializeField] float bossGrappleForceMultiplier;
+    [SerializeField] string[] stepSounds;
     [SerializeField] Boss boss;
 
     public delegate void DestroySomeStuff();
@@ -31,7 +33,10 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     public Slider HealthBar;
     public GameObject DeadMenu;
+    public AudioManager audioManager;
     [SerializeField] GameObject webSnapParticle;
+    [SerializeField] GameObject jumpParticle;
+    [SerializeField] GameObject runParticle;
     [SerializeField] Transform groundCheck;
 
 
@@ -54,6 +59,7 @@ public class PlayerController : MonoBehaviour
     float mx = 0;
     float runSpeedValue;
     float jumpSpeedValue;
+    float timeBetweenStepValue;
     void Start()
     {
         Cursor.visible = true;
@@ -62,7 +68,8 @@ public class PlayerController : MonoBehaviour
         gravityDefaultValue = rigidBody.gravityScale;
         jumpSpeedValue= jumpSpeed;
         runSpeedValue = runSpeed;
-    }
+        timeBetweenStepValue= timeBetweenStep;
+}
 
 
     void Update()
@@ -236,6 +243,9 @@ public class PlayerController : MonoBehaviour
             {
                 isJumping = true;
                 Vector2 jumpForce = new Vector2(0, jumpSpeed);
+                GameObject jumpParticleObject = Instantiate(jumpParticle, groundCheck.position, Quaternion.identity);
+                jumpParticleObject.transform.parent = gameObject.transform;
+                Destroy(jumpParticleObject, 2f);
                 rigidBody.velocity += jumpForce;
             }
         }
@@ -245,6 +255,7 @@ public class PlayerController : MonoBehaviour
         isGrounded=Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundMask);//ağla ugur
         animator.SetBool("isJumping", false);
         isJumping = false;
+
 
     }
 
@@ -305,12 +316,30 @@ public class PlayerController : MonoBehaviour
     {
         if (PlayerHasVelocity())
         {
-
             transform.localScale = new Vector2(Mathf.Abs(transform.localScale.x)*Mathf.Sign(rigidBody.velocity.x), transform.localScale.y); // return 1 if velocity.x greater than 0 , return -1 if velocity is less than 0; //change back to 1
+            if (isGrounded)
+            {
+                runParticle.SetActive(true);
+                if (timeBetweenStep <= 0)
+                {
+                    audioManager.Play(stepSounds[UnityEngine.Random.Range(0, 3)]);
+                    timeBetweenStep = timeBetweenStepValue;
+                }
+                else
+                {
+                    timeBetweenStep -= Time.deltaTime;
+                    
+                }
+            }
+            else
+            {
+                runParticle.SetActive(false);
+            }
         }
         else
         {
             animator.SetBool("isRunning", false);
+            runParticle.SetActive(false);
         }
     }
     private bool PlayerHasVelocity()

@@ -6743,6 +6743,7 @@ GameObject:
   - component: {fileID: 134044222}
   - component: {fileID: 134044223}
   - component: {fileID: 134044224}
+  - component: {fileID: 134044225}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -6801,6 +6802,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f374d6f0cd53bc498db57e65e8f6c05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &134044225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134044221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4daf0d4f36aeef74aaa9f1a414ebdaf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: guitar
+    clip: {fileID: 8300000, guid: 3ab136113af80e943b857beff946c525, type: 3}
+    volume: 0.15
+    pitch: 1
+    priority: 0
+    loop: 1
+    source: {fileID: 0}
+  - name: SpiderWalk1
+    clip: {fileID: 8300000, guid: 846c5352ce3c578489248669242ec949, type: 3}
+    volume: 0.7
+    pitch: 1
+    priority: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: SpiderWalk2
+    clip: {fileID: 8300000, guid: 29aa67685346bbc4faf57ea83228f643, type: 3}
+    volume: 0.7
+    pitch: 1
+    priority: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: SpiderWalk3
+    clip: {fileID: 8300000, guid: ee99340d0e9e6e04cb18515daaabcd50, type: 3}
+    volume: 0.7
+    pitch: 1
+    priority: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: SpiderWebShoot
+    clip: {fileID: 8300000, guid: bdb057c59a097874288c9329ea6b706c, type: 3}
+    volume: 0.68
+    pitch: 1
+    priority: 0
+    loop: 0
+    source: {fileID: 0}
+  - name: Bass
+    clip: {fileID: 8300000, guid: 6509044047206fa498a0528204854af0, type: 3}
+    volume: 0.2
+    pitch: 1
+    priority: 0
+    loop: 1
+    source: {fileID: 0}
+  mute: 0
 --- !u!1 &134246124
 GameObject:
   m_ObjectHideFlags: 0
@@ -10533,11 +10590,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4550523820536806, guid: d975e66254b08984ab50d4c39dcb947f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 131.1
+      value: 148.31392
       objectReference: {fileID: 0}
     - target: {fileID: 4550523820536806, guid: d975e66254b08984ab50d4c39dcb947f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15.65
+      value: 14.527881
       objectReference: {fileID: 0}
     - target: {fileID: 4550523820536806, guid: d975e66254b08984ab50d4c39dcb947f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -30612,7 +30669,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1112747149
 Transform:
   m_ObjectHideFlags: 0
@@ -34606,7 +34663,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 4.4095726, y: 0.8876295}
+  m_Offset: {x: 8.826996, y: 2.829811}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -34617,7 +34674,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.156868, y: 5.2874393}
+  m_Size: {x: 2.8493195, y: 9.1718025}
   m_EdgeRadius: 0
 --- !u!4 &1329333889
 Transform:
@@ -44007,7 +44064,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -2.3035622, y: 0.17322367}
+  m_Offset: {x: -2.3035622, y: 0.09769726}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -44018,7 +44075,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 72.747444, y: 2.948588}
+  m_Size: {x: 72.747444, y: 2.797535}
   m_EdgeRadius: 0
 --- !u!1 &1862570505
 GameObject:
@@ -46347,7 +46404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAAAYIeyDWzZJZwIAAAsFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVMty4jAQ/BVK54UCg0m8t12HkD3kUSFbufgirDFWIUsuPQIkxb/vSLaxw54Q0zOj7p6RvwiXpobcKr3WnD0qBuTniPgz+THqwQc40p2SG/4JXc47Z7b0STTkvFLLFcZnvsyoCqzm+S+5Ez55ikEneaF0tWI7SJWxBsMFFQYQ0sr6aomhrxE54s848SUnPEU3/vSJp2Q6OuMxB2lB96mz6HaySJJkmXQV8SRuSxaTOE5u4ng+X42ny1DuZC5oVQPzWvout3FbPY9DmkSVbYZXlCshuGkpEnuqgwUprY1DgZjAOEXJgZfPL4HvSuvJDIufi8KAbf3Q9HTHNTrXdCW/VWNnRc2+4fVBhYMgqKHeNH38Dx/PAlxoVT10986m/g5b8nz/Sk85NXbg9zB89524kwcq9nQr4L0E+aTWWjnJELTa+VJnILrr/16kpSXk+z7eUL0Kurr3uxtvN1yv4RzUH1PBq62HJosmsBEq+B12AjRO5g8SDhtj2hYY9Sz+Gniju+FqtcA918Yi1KqUnt5WOe1TySp45tU4myotIYRb0jVIKuzpBdvY6xFeYYNrr5B76h9Re3mLdW/jqiSE+/zp9Ap6UYfLsEypDo9gymdnBZfQk/bAE/qUKimbDRt60pVtnC5oPijbOc6+rxaJChYxYMtFfMvYPFqMb+I8YQVNCrqcLaLZkoTd4xJ1UvHSEG3twanJvrnEPeu+LaO1pnXYdqbpYc0/KzWwnMtCbXINIJ+bDhfioPESfJVsxTgatAFruQzzJl8ZESrfA8sujbKgdHW0mmZ9l4zU/ENZH8lIGj4mGTmT8z9QSwMEFAAACAgAABgh7Kp2io5tAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSMzTVUVBKL0osyCgGihiCOKWZKSB2tJJRWopRSmqKmYmpRUqKsZGJrrlpsmVKWqJlWqKZoYmRoZlSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAABgh7INbNklnAgAACwUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAABgh7Kp2io5tAAAAeAAAAAkAJAAAAAAAAAAAAAAAtAIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAABsAwAAAAA=
+    dataString: UEsDBBQAAAgIAAAYIewGDhFabAIAAA4FAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVMtyozAQ/BWXzmsXYDBhb7vEcfaQR8XZyoWLggajspAoPWI7Kf/7SgIM8fpiMT0z6u4Z+EKUqxZKLeRGUvIgCKCfM+TO6MdsBO/hiHeCb+knDDlvlOjaJWGf84I1FTYeujIlGtCSlr/4jrnkwAYNp5WQzZrsIBdKKxuuMFNgISm0q+Y29DVDR/s3z1zJyZ6i1J0+7SkLZmd7LIFrkGNqGi7iLMvSPj9ZJIH9LZfxULa4WcZpcrOeB6lvYHjJcNMCcWrGPmGW9S3SxOdxK7RPcaJKwRhVPUukT613IcetMlajTSAUW9Wemsuvge5q7RRMi5+qSoHuLZH4dEulNa/rin6LztEGq31H7AMz4+6JkpXn1DV9+A+fhx6upGjuh3vDwN2ha1ruX/CpxEpPLJ+Gb78TN/yA2R6/M3irgT+KjRSGEwtqaVypURDdjo8XaXkN5X6Md1SvgqYdDR8mPMzXaTh79cec0ebdQYu4C2yZ8H77tQBpJ/PHEvZLo/oWNupY/FXwinfT7eqBOyqVtlCvkjt678JIl4rW3jOnxuhcSA4+3JNugWOmT8+2jb4e4RU2ufYKucPuPeov77Hh9bgq8eExPwiuoGdxuAxL1eLwAKp+MppRDiNpBzxan3LBebdhU0+Gsq2RFS4nZTtDyffVQlFFIgJkFSc3hCyjeJ4mZUYqnFV4FcZRuEJ+9yi3OjF77oj29tip8bE5t3s2fF5mG4lbv+1E4sOGfjZiYjnlldiWEoA/dR0uxEHaS+xbSdaEWoO2oDXlft7oq0BMlHsgxaVR4ZWuj1riYuxSoJZ+CO0iBcr996RAZ3T+B1BLAwQUAAAICAAAGCHsqnaKjm0AAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNVRUEovSizIKAaKGII4pZkpIHa0klFailFKaoqZialFSoqxkYmuuWmyZUpaomVaopmhiZGhmVIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrqee1FmijvIaKXYWgBQSwECLQAUAAAICAAAGCHsBg4RWmwCAAAOBQAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAAGCHsqnaKjm0AAAB4AAAACQAkAAAAAAAAAAAAAAC5AgAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAACAAIAuAAAAHEDAAAAAA==
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
@@ -49210,7 +49267,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2142061883}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3.786087, y: 0.022118568, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 405662950}
@@ -49455,6 +49512,16 @@ PrefabInstance:
       propertyPath: bossCamera
       value: 
       objectReference: {fileID: 2142061883}
+    - target: {fileID: 6675907394598012170, guid: b4356aea3f174314ba934128fdd6afb7,
+        type: 3}
+      propertyPath: bossHealth
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6675907394598012181, guid: b4356aea3f174314ba934128fdd6afb7,
+        type: 3}
+      propertyPath: bulletSpeed
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4356aea3f174314ba934128fdd6afb7, type: 3}
 --- !u!4 &1142721755412071666
@@ -49784,15 +49851,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 134044222}
     m_Modifications:
-    - target: {fileID: 5076707035970025954, guid: c5ecdca180388154aa97fcedfbca7ef4,
+    - target: {fileID: 5076707035970025955, guid: c5ecdca180388154aa97fcedfbca7ef4,
         type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: 131.04001
-      objectReference: {fileID: 0}
-    - target: {fileID: 5076707035970025954, guid: c5ecdca180388154aa97fcedfbca7ef4,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.y
-      value: 12.95
+      propertyPath: stepSounds.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5076707035970025955, guid: c5ecdca180388154aa97fcedfbca7ef4,
         type: 3}
@@ -49811,8 +49873,28 @@ PrefabInstance:
       objectReference: {fileID: 2140321436}
     - target: {fileID: 5076707035970025955, guid: c5ecdca180388154aa97fcedfbca7ef4,
         type: 3}
-      propertyPath: groundMask.m_Bits
-      value: 16640
+      propertyPath: audioManager
+      value: 
+      objectReference: {fileID: 134044225}
+    - target: {fileID: 5076707035970025955, guid: c5ecdca180388154aa97fcedfbca7ef4,
+        type: 3}
+      propertyPath: timeBetweenStep
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5076707035970025955, guid: c5ecdca180388154aa97fcedfbca7ef4,
+        type: 3}
+      propertyPath: stepSounds.Array.data[0]
+      value: SpiderWalk1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5076707035970025955, guid: c5ecdca180388154aa97fcedfbca7ef4,
+        type: 3}
+      propertyPath: stepSounds.Array.data[1]
+      value: SpiderWalk2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5076707035970025955, guid: c5ecdca180388154aa97fcedfbca7ef4,
+        type: 3}
+      propertyPath: stepSounds.Array.data[2]
+      value: SpiderWalk3
       objectReference: {fileID: 0}
     - target: {fileID: 5076707035970025958, guid: c5ecdca180388154aa97fcedfbca7ef4,
         type: 3}
@@ -49822,12 +49904,12 @@ PrefabInstance:
     - target: {fileID: 5076707035970025966, guid: c5ecdca180388154aa97fcedfbca7ef4,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 131.1
+      value: 152.1
       objectReference: {fileID: 0}
     - target: {fileID: 5076707035970025966, guid: c5ecdca180388154aa97fcedfbca7ef4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.8
+      value: 11.7
       objectReference: {fileID: 0}
     - target: {fileID: 5076707035970025966, guid: c5ecdca180388154aa97fcedfbca7ef4,
         type: 3}
@@ -49873,11 +49955,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5076707036256863014, guid: c5ecdca180388154aa97fcedfbca7ef4,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5ecdca180388154aa97fcedfbca7ef4, type: 3}
@@ -50030,7 +50107,7 @@ PrefabInstance:
     - target: {fileID: 4141023823758624249, guid: 3c351caf730659341b5ba8e805c32ced,
         type: 3}
       propertyPath: bossHealth
-      value: 60
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 4141023823758624249, guid: 3c351caf730659341b5ba8e805c32ced,
         type: 3}
@@ -50106,6 +50183,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BakedWaspBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 4141023823758624250, guid: 3c351caf730659341b5ba8e805c32ced,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4141023823758624253, guid: 3c351caf730659341b5ba8e805c32ced,
         type: 3}

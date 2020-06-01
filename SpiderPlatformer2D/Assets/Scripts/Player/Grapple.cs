@@ -80,6 +80,7 @@ public class Grapple : MonoBehaviour
             GameObject bulletInstance = Instantiate(bullet, shootPoint.position, Quaternion.identity);
             bulletInstance.GetComponent<GrappleBullet>().SetGrapple(this); // this method will called immedialty when bullet instance is born.
             bulletInstance.GetComponent<Rigidbody2D>().AddForce(shootPoint.right * bulletSpeed);
+            playerController.audioManager.Play("SpiderWebShoot");
             Destroy(bulletInstance, 0.6f);
         }
     }

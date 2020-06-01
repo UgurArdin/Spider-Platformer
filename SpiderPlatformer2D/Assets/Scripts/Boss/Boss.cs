@@ -109,6 +109,7 @@ public class Boss : MonoBehaviour
             bossCamera.SetActive(false);
             GetComponent<BoxCollider2D>().enabled = false;
             GetComponent<CircleCollider2D>().enabled = false;
+            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             GetComponent<Rigidbody2D>().isKinematic = true;
             bossHealthSlider.gameObject.SetActive(false);
         }
